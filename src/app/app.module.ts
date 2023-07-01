@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AuthModule } from '@auth0/auth0-angular';
 @NgModule({
   declarations: [AppComponent, NavigationComponent, AuthComponent],
   imports: [
@@ -22,6 +23,13 @@ import { environment } from '../environments/environment';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
+    }),
+    AuthModule.forRoot({
+      domain: environment.domain_name,
+      clientId: environment.clint_Id,
+      authorizationParams: {
+        redirect_uri: "https://d0ee-2409-40c1-2-aa8c-7092-20fb-416e-70b3.ngrok-free.app/"
+      }
     }),
   ],
   providers: [],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl ,Validators} from '@angular/forms';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +14,7 @@ export class AuthComponent implements OnInit {
     password:new FormControl('',Validators.required),
   });
 
-  constructor(private fb :FormBuilder) { }
+  constructor(private fb :FormBuilder,public auth: AuthService) { }
 
   toggle(){
     this.toggleForm = !this.toggleForm; 
@@ -40,6 +41,9 @@ export class AuthComponent implements OnInit {
         console.log("sinup",this.authForm.value);
       }
     }
+  }
+  googleLogin(){
+    this.auth.loginWithPopup()
   }
 
 }
