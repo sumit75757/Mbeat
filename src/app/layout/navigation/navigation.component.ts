@@ -69,22 +69,15 @@ export class NavigationComponent implements OnInit {
       method: 'POST',
       url: 'https://mbeat.us.auth0.com/oauth/token',
       headers: {'content-type': 'application/x-www-form-urlencoded'},
-      data: new URLSearchParams({
-        grant_type: 'client_credentials',
+      data: {
+        grant_type: 'authorization_code',
         client_id: 'X5RhAXjVxx2Tw8mcefvpmaF59xZBGLRn',
         client_secret: 'B19fijc1T9e7ynwye3b8pqWWk5GGiZcmklzdg7fO2iWoVd7uiKAoWc1Z5JRx9Pm1',
         audience: 'https://mbeat.us.auth0.com/api/v2/'
-      })
+      }
     };
-    let data= new URLSearchParams({
-      grant_type: 'client_credentials',
-      client_id: '{yourClientId}',
-      client_secret: '{yourClientSecret}',
-      audience: 'https://{yourDomain}/api/v2/'
-    })
     this.http.post("https://mbeat.us.auth0.com/oauth/token",options.data).subscribe(res=>{
       console.log(res);
-      
     })
   }
 }
