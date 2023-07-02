@@ -18,17 +18,17 @@ import { AuthModule } from '@auth0/auth0-angular';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //   enabled: environment.production,
+    //   // Register the ServiceWorker as soon as the application is stable
+    //   // or after 30 seconds (whichever comes first).
+    //   registrationStrategy: 'registerWhenStable:300'
+    // }),
     AuthModule.forRoot({
       domain: environment.domain_name,
       clientId: environment.clint_Id,
       authorizationParams: {
-        redirect_uri: "https://d0ee-2409-40c1-2-aa8c-7092-20fb-416e-70b3.ngrok-free.app/"
+        redirect_uri: "http://localhost:4200/"
       }
     }),
   ],

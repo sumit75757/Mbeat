@@ -43,7 +43,10 @@ export class AuthComponent implements OnInit {
     }
   }
   googleLogin(){
-    this.auth.loginWithPopup()
+    this.auth.loginWithPopup().subscribe(res=>{
+      console.log(res);
+      
+    })
   }
 
 }
