@@ -10,14 +10,13 @@ import { AuthService } from '@auth0/auth0-angular';
 export class NavigationComponent implements OnInit {
   sidebar: boolean = false;
   isDarkEnable: boolean = false;
-  user:any = JSON.parse(localStorage.getItem('user')+'');
-  constructor(public auth: AuthService,private http :HttpClient) {}
+  user: any = JSON.parse(localStorage.getItem('user') + '');
+  constructor(public auth: AuthService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.isDarkEnable = JSON.parse(localStorage.getItem('theme') + '');
     this.addClassToBody();
     console.log(this.user);
-    
   }
   changeTheme() {
     this.isDarkEnable = !this.isDarkEnable;
@@ -44,7 +43,7 @@ export class NavigationComponent implements OnInit {
         this.auth.idTokenClaims$.subscribe(
           (res) => {
             console.log('id:', res);
-            localStorage.setItem("user",JSON.stringify(res))
+            localStorage.setItem('user', JSON.stringify(res));
           },
           (err) => {
             console.log('err', err);
@@ -55,29 +54,33 @@ export class NavigationComponent implements OnInit {
         console.log('err', err);
       }
     );
-    // this.auth.getAccessTokenSilently().subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //   },
-    //   (err) => {
-    //     console.log('err', err);
-    //   }
-    // );
-  }
-  getaudiunc(){
-    var options:any = {
-      method: 'POST',
-      url: 'https://mbeat.us.auth0.com/oauth/token',
-      headers: {'content-type': 'application/x-www-form-urlencoded'},
-      data: {
-        grant_type: 'authorization_code',
-        client_id: 'X5RhAXjVxx2Tw8mcefvpmaF59xZBGLRn',
-        client_secret: 'B19fijc1T9e7ynwye3b8pqWWk5GGiZcmklzdg7fO2iWoVd7uiKAoWc1Z5JRx9Pm1',
-        audience: 'https://mbeat.us.auth0.com/api/v2/'
+    this.auth.getAccessTokenSilently().subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log('err', err);
       }
-    };
-    this.http.post("https://mbeat.us.auth0.com/oauth/token",options.data).subscribe(res=>{
-      console.log(res);
-    })
+    );
+  }
+  // getaudiunc(){
+  //   var options:any = {
+  //     method: 'POST',
+  //     url: 'https://mbeat.us.auth0.com/oauth/token',
+  //     headers: {'content-type': 'application/x-www-form-urlencoded'},
+  //     data: {
+  //       grant_type: 'authorization_code',
+  //       client_id: 'X5RhAXjVxx2Tw8mcefvpmaF59xZBGLRn',
+  //       client_secret: 'B19fijc1T9e7ynwye3b8pqWWk5GGiZcmklzdg7fO2iWoVd7uiKAoWc1Z5JRx9Pm1',
+  //       audience: 'https://mbeat.us.auth0.com/api/v2/'
+  //     }
+  //   };
+  //   this.http.post("https://mbeat.us.auth0.com/oauth/token",options.data).subscribe(res=>{
+  //     console.log(res);
+  //   })
+  // }
+  logout() {
+    this.auth.logout();
+    localStorage.removeItem('user');
   }
 }
