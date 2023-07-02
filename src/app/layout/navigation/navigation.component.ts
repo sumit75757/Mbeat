@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -11,12 +12,15 @@ export class NavigationComponent implements OnInit {
   sidebar: boolean = false;
   isDarkEnable: boolean = false;
   user: any = JSON.parse(localStorage.getItem('user') + '');
-  constructor(public auth: AuthService, private http: HttpClient) {}
+  token: any = localStorage.getItem('token');
+
+  constructor(public auth: AuthService, private http: HttpClient,private meta: Meta
+  ) {}
 
   ngOnInit(): void {
     this.isDarkEnable = JSON.parse(localStorage.getItem('theme') + '');
     this.addClassToBody();
-    console.log(this.user);
+    console.log(this.user,this.token);
   }
   changeTheme() {
     this.isDarkEnable = !this.isDarkEnable;
@@ -31,23 +35,33 @@ export class NavigationComponent implements OnInit {
 
   addClassToBody() {
     if (this.isDarkEnable) {
+      this.meta.removeTag('theme-color');
+      this.meta.addTag({ name: 'theme-color', content: '#1f2937' });
       document.body.classList.add('dark');
+      document.body.classList.add('bg-gray-900');
     } else {
       document.body.classList.remove('dark');
+      document.body.classList.remove('bg-gray-900');
+      this.meta.removeTag('theme-color');
+      this.meta.addTag({ name: 'theme-color', content: '#fff' });
+
+
     }
   }
   googleLogin() {
     this.auth.loginWithPopup().subscribe(
       (res) => {
         console.log(res);
-         this.auth.getAccessTokenSilently().subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log('err', err);
-      }
-    );
+        this.auth.getAccessTokenSilently().subscribe(
+          (res) => {
+            localStorage.setItem('token', res);
+
+            console.log(res);
+          },
+          (err) => {
+            console.log('err', err);
+          }
+        );
         this.auth.idTokenClaims$.subscribe(
           (res) => {
             console.log('id:', res);
@@ -62,7 +76,6 @@ export class NavigationComponent implements OnInit {
         console.log('err', err);
       }
     );
-   
   }
   // getaudiunc(){
   //   var options:any = {
@@ -83,5 +96,7 @@ export class NavigationComponent implements OnInit {
   logout() {
     this.auth.logout();
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
+
   }
 }

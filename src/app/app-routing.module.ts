@@ -8,7 +8,10 @@ const routes: Routes = [
     path: '',
     component: NavigationComponent,
     children:[
-      
+      {
+        path:"",
+        loadChildren:()=>import('./page/dashbord/dashbord.module').then(m=>m.DashbordModule)
+      }
     ]
   },{
     path:'auth',

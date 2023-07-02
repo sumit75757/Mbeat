@@ -10,6 +10,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AuthModule } from '@auth0/auth0-angular';
+
+let pwa :any =[]
+
 @NgModule({
   declarations: [AppComponent, NavigationComponent, AuthComponent],
   imports: [
@@ -18,12 +21,6 @@ import { AuthModule } from '@auth0/auth0-angular';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    // ServiceWorkerModule.register('ngsw-worker.js', {
-    //   enabled: environment.production,
-    //   // Register the ServiceWorker as soon as the application is stable
-    //   // or after 30 seconds (whichever comes first).
-    //   registrationStrategy: 'registerWhenStable:300'
-    // }),
     AuthModule.forRoot({
       domain: environment.domain_name,
       clientId: environment.clint_Id,
@@ -31,8 +28,20 @@ import { AuthModule } from '@auth0/auth0-angular';
         redirect_uri: window.location.href
       }
     }),
+    ...pwa
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(){
+    if (environment.PWA) {
+      pwa = ServiceWorkerModule.register('ngsw-worker.js', {
+       enabled: environment.production,
+       // Register the ServiceWorker as soon as the application is stable
+       // or after 30 seconds (whichever comes first).
+       registrationStrategy: 'registerWhenStable:300'
+     })
+    }
+  }
+}
