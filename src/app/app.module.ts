@@ -28,7 +28,7 @@ import { AuthModule } from '@auth0/auth0-angular';
       domain: environment.domain_name,
       clientId: environment.clint_Id,
       authorizationParams: {
-        redirect_uri: "http://localhost:4200/"
+        redirect_uri: window.location.href
       }
     }),
   ],

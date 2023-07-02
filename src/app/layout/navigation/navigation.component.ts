@@ -40,6 +40,14 @@ export class NavigationComponent implements OnInit {
     this.auth.loginWithPopup().subscribe(
       (res) => {
         console.log(res);
+         this.auth.getAccessTokenSilently().subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log('err', err);
+      }
+    );
         this.auth.idTokenClaims$.subscribe(
           (res) => {
             console.log('id:', res);
@@ -54,14 +62,7 @@ export class NavigationComponent implements OnInit {
         console.log('err', err);
       }
     );
-    this.auth.getAccessTokenSilently().subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log('err', err);
-      }
-    );
+   
   }
   // getaudiunc(){
   //   var options:any = {
