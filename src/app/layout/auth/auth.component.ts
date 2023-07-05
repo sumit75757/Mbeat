@@ -43,5 +43,33 @@ export class AuthComponent implements OnInit {
     }
   }
  
+  googleLogin() {
+    this.auth.loginWithPopup().subscribe(
+      (res) => {
+        console.log(res);
+        // this.auth.getAccessTokenSilently().subscribe(
+        //   (res) => {
+        //     localStorage.setItem('token', res);
+        //     console.log(res);
+        //   },
+        //   (err) => {
+        //     console.log('err', err);
+        //   }
+        // );
+        // this.auth.idTokenClaims$.subscribe(
+        //   (res) => {
+        //     console.log('id:', res);
+        //     localStorage.setItem('user', JSON.stringify(res));
+        //   },
+        //   (err) => {
+        //     console.log('err', err);
+        //   }
+        // );
+      },
+      (err) => {
+        console.log('err', err);
+      }
+    );
+  }
 
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { AuthComponent } from './layout/auth/auth.component';
+import { DistributerComponent } from './page/distributer/distributer.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
       {
         path:"",
         loadChildren:()=>import('./page/dashbord/dashbord.module').then(m=>m.DashbordModule)
+      },
+      {
+        path:"distributer",
+        component:DistributerComponent
       }
     ]
   },{

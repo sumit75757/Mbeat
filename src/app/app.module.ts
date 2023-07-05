@@ -10,11 +10,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AuthModule } from '@auth0/auth0-angular';
+import { DistributerComponent } from './page/distributer/distributer.component';
+import { RetailerComponent } from './page/retailer/retailer.component';
 
 let pwa :any =[]
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent, AuthComponent],
+  declarations: [AppComponent, NavigationComponent, AuthComponent, DistributerComponent, RetailerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
