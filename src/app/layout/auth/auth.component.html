@@ -1,4 +1,4 @@
-<!-- <section class="bg-gray-50 dark:bg-gray-900">
+<section class="bg-gray-50 dark:bg-gray-900">
   <div
     class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
   >
@@ -22,7 +22,7 @@
         >
           Create and account
         </h1>
-        <form class="space-y-4 md:space-y-6" [formGroup]="authForm">
+        <form class="space-y-4 md:space-y-6" (submit)="submit()" [formGroup]="authForm">
             <div *ngIf="toggleForm">
                 <label
                   for="username"
@@ -34,7 +34,7 @@
                   name="User Name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="User Name"
-                  formControlName="username"
+                  formControlName="Name"
                 />
               </div>
           <div>
@@ -45,11 +45,9 @@
             >
             <input
               type="email"
-              name="email"
-              id="email"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="name@company.com"
-              formControlName="email"
+              formControlName="Email"
             />
           </div>
           <div>
@@ -60,11 +58,9 @@
             >
             <input
               type="password"
-              name="password"
-              id="password"
               placeholder="••••••••"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              formControlName="password"
+              formControlName="Password"
             />
           </div>
           <div class="flex items-start" *ngIf="toggleForm">
@@ -109,8 +105,8 @@
       </div>
     </div>
   </div>
-</section> -->
-<div>
+</section>
+<!-- <div>
   <nav
     class="bg-gray-800 border-gray-200 flex flex-wrap items-center dark:bg-gray-900"
   >
@@ -140,4 +136,4 @@
       Sign in <i class="fa-solid fa-right-to-bracket ml-1"></i>
     </button>
   </div>
-</div>
+</div> -->

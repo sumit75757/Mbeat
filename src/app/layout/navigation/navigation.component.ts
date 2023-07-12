@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -11,39 +12,51 @@ import { AuthService } from '@auth0/auth0-angular';
 export class NavigationComponent implements OnInit {
   sidebar: boolean = false;
   isDarkEnable: boolean = false;
-  user: any = JSON.parse(localStorage.getItem('user') + '');
   token: any = localStorage.getItem('token');
   routeConfig = [
     {
       name: 'Deshbord',
-      icon: '',
+      icon: 'fa-solid fa-house',
       route: '/',
     },
     {
       name: 'Distributer',
-      icon: '',
+      icon: 'fa-solid fa-building-circle-arrow-right',
       route: '/distributer',
     },{
       name: 'Retailer',
-      icon: '',
+      icon: 'fa-solid fa-store',
       route: '/retailer',
     },{
-      name: 'Seller',
-      icon: '',
-      route: '/seller',
+      name: 'Merchant',
+      icon: 'fa-solid fa-users',
+      route: '/merchant',
+    },
+    {
+      name: 'order',
+      icon: 'fa-solid fa-cart-shopping',
+      route: '/order',
     },
   ];
 
   constructor(
     public auth: AuthService,
     private http: HttpClient,
-    private meta: Meta
+    private meta: Meta,
+    private route:Router
   ) {}
-
+  user:any
   ngOnInit(): void {
     this.isDarkEnable = JSON.parse(localStorage.getItem('theme') + '');
+    this.user = JSON.parse(localStorage.getItem('userdata') + '');
+    if (this.user.Role == "Admin") {
+      this.routeConfig.push({
+        name: 'City',
+        icon: 'fa-solid fa-city',
+        route: '/city',
+      })
+    }
     this.addClassToBody();
-    console.log(this.user, this.token);
   }
   changeTheme() {
     this.isDarkEnable = !this.isDarkEnable;
@@ -98,24 +111,9 @@ export class NavigationComponent implements OnInit {
       }
     );
   }
-  // getaudiunc(){
-  //   var options:any = {
-  //     method: 'POST',
-  //     url: 'https://mbeat.us.auth0.com/oauth/token',
-  //     headers: {'content-type': 'application/x-www-form-urlencoded'},
-  //     data: {
-  //       grant_type: 'authorization_code',
-  //       client_id: 'X5RhAXjVxx2Tw8mcefvpmaF59xZBGLRn',
-  //       client_secret: 'B19fijc1T9e7ynwye3b8pqWWk5GGiZcmklzdg7fO2iWoVd7uiKAoWc1Z5JRx9Pm1',
-  //       audience: 'https://mbeat.us.auth0.com/api/v2/'
-  //     }
-  //   };
-  //   this.http.post("https://mbeat.us.auth0.com/oauth/token",options.data).subscribe(res=>{
-  //     console.log(res);
-  //   })
-  // }
+
   logout() {
-    this.auth.logout();
+    this.route.navigate(['/auth'])
     localStorage.removeItem('user');
     localStorage.removeItem('token');
   }

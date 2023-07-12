@@ -1,0 +1,207 @@
+<div class="h-full overflow-auto ">
+    <div class="mt-1 sm:p-0" >
+        <div class="mb-2 dark:hover:bg-gray-800 dark:text-gray-300  hover:bg-gray-100">
+            <a routerLink="/retailer">
+                <i class="fa-solid fa-arrow-left w-5 flex  h-5 sm:w-6 sm:h-6"></i>
+            </a>
+        </div>
+      <div
+      class="rounded-xl shadow-xl p-1.5 dark:bg-gray-900"
+      style="margin: 0 auto; "
+      >
+      <h2 class="text-lg mb-3 font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
+        <form
+          [formGroup]="retailerForm"
+          (ngSubmit)="formSubmit()"
+          class=""
+          validate
+        >
+          <!-- <div class="" style="width: 150px; ">
+            <img src="" alt="Header image" />
+          </div> -->
+          <div
+            class="flex mt-1 sm:pt-0 sm:m-0"
+            style="flex-wrap: wrap; gap: 20px"
+          >
+            <div class="formInput" style="flex-grow: 1">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="name">Full Name</label>
+              <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                type="text"
+                formControlName="MerchantName"
+                placeholder="Enter your user name"
+                required
+              />
+              <!-- <span
+                class="error"
+                *ngIf="
+                  (f.controls.['name']?.errors?.required &&
+                    (f.controls.['name'].dirty || f.controls.['name'].touched)) ||
+                  isAllValid
+                "
+              >
+                Your user name is required.
+              </span> -->
+            </div>
+  
+            <div class="formInput" style="flex-grow: 1">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="mobile">Mobile Number</label>
+              <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                type="number"
+                formControlName="MerchantTelNo"
+                placeholder="Enter your mobile number"
+                required
+              />
+              <!-- <span
+                class="error"
+                *ngIf="
+                  (f.controls.['mobile'].errors?.required &&
+                    (f.controls.['mobile'].dirty || f.controls.['mobile'].touched)) ||
+                  isAllValid
+                "
+              >
+                Your mobile number is required.
+              </span> -->
+            </div>
+          </div>
+          <div
+            class="flex mt-1 sm:pt-0 sm:m-0"
+            style="flex-wrap: wrap; gap: 20px"
+          >
+          <div class="formInput" style="flex-grow: 1">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="state">Email</label>
+            <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="email"
+              formControlName="MerchantEmail"
+              placeholder="Enter your Email"
+              required
+            />
+            <!-- <span
+              class="error"
+              *ngIf="
+                (f.controls.['state'].errors?.required &&
+                  (f.controls.['state'].dirty || f.controls.['state'].touched)) ||
+                isAllValid
+              "
+            >
+              Your state is required.
+            </span> -->
+          </div>
+        </div>
+          <div
+            class="flex sm:pt-0 sm:m-0"
+            style="flex-wrap: wrap; gap: 20px; padding-top: 10px"
+          >
+            <div class="formInput" style="flex-grow: 1">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="address">Address</label>
+              <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                type="text"
+                formControlName="MerchantAddress"
+                placeholder="Enter your address"
+                required
+              />
+              
+              <!-- <span
+                class="error"
+                *ngIf="
+                  (f.controls.['address'].errors?.required &&
+                    (f.controls.['address'].dirty ||
+                      f.controls.['address'].touched)) ||
+                  isAllValid
+                "
+              >
+                Your address is required.
+              </span> -->
+            </div>
+  
+          
+            <div class="formInput" style="flex-grow: 1">
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="state">State</label>
+              <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                type="text"
+                formControlName="MerchantAddress"
+                placeholder="Enter your Address"
+                required
+              />
+              <!-- <span
+                class="error"
+                *ngIf="
+                  (f.controls.['state'].errors?.required &&
+                    (f.controls.['state'].dirty || f.controls.['state'].touched)) ||
+                  isAllValid
+                "
+              >
+                Your state is required.
+              </span> -->
+            </div>
+          </div>
+          <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="city">City</label>
+            <ng-select formControlName="CityId" [items]="citys" bindLabel="CityName" bindValue="CityId">
+            </ng-select>
+            <!-- <span
+              class="error"
+              *ngIf="
+                (f.controls.['city'].errors?.required &&
+                  (f.controls.['city'].dirty || f.controls.['city'].touched)) ||
+                isAllValid
+              "
+            >
+              Your city is required.
+            </span> -->
+          </div>
+          <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="zipcode">Distributor Name</label>
+          
+            <ng-select  placeholder="Enter Area Name" formControlName="DistributorId" [items]="distributer" bindLabel="DistributorName" bindValue="DistributorId">
+            </ng-select>
+            <!-- <span
+              class="error"
+              *ngIf="
+                (f.controls.['zipcode'].errors?.required &&
+                  (f.controls.['zipcode'].dirty || f.controls.['zipcode'].touched)) ||
+                isAllValid
+              "
+            >
+              Your zipcode is required.
+            </span> -->
+          </div>
+        
+  
+          <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="gstnumber">GST Number</label>
+            <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="text"
+              formControlName="MerchantGSTNumber"
+              placeholder="Enter your gst number"
+            />
+            <!-- <span
+              class="error"
+              *ngIf="
+                (f.controls.['gstnumber'].errors?.required &&
+                  (f.controls.['gstnumber'].dirty || f.controls.['gstnumber'].touched)) ||
+                isAllValid
+              "
+            >
+              Your gst number is required.
+            </span> -->
+          </div>
+          <div class="pt-3 flex justify-end">
+            <button
+              type="submit"
+              class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+              (click)="resetData()"
+            >
+              Cancel  
+            </button>
+            <button
+              type="submit"
+              class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+              >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

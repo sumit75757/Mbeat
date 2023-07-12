@@ -1,0 +1,17 @@
+.formInput {
+    display: flex;
+    flex-direction: column;
+     input{
+         border: 1px solid #26262642;
+         border-radius: 8px;
+         padding: 10px;
+         font-size: 14px;
+         font-weight: 400;
+     }
+  }
+  .error{
+     color: red;
+     padding-left: 15px;
+     font-size: 14px;
+   }
+  

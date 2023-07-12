@@ -1,0 +1,71 @@
+<div class="h-full overflow-auto">
+    <div class="mt-1 sm:p-0" style="padding: 4%">
+      <div
+        class="rounded-xl shadow-xl w-10/12 sm:w-full"
+        style="margin: 0 auto; background: #ffffff"
+      >
+        <form
+          [formGroup]="orderForm"
+          (ngSubmit)="formSubmit()"
+          class="p-12 sm:p-3"
+          validate
+        >
+          <div class="" style="width: 150px; margin: auto">
+            <img src="" alt="Header image" />
+          </div>
+          <div
+            class="flex mt-1 sm:pt-0 sm:m-0"
+            style="flex-wrap: wrap; gap: 20px"
+          >
+            <div class="formInput" style="flex-grow: 1">
+              <label for="city">Select City</label>
+              <input
+                type="text"
+                id="city"
+                formControlName="city"
+                placeholder="Enter your city"
+                required
+              />
+              <!-- <span
+                class="error"
+                *ngIf="
+                  (f.controls.city?.errors?.required &&
+                    (f.controls.city.dirty || f.controls.city.touched)) ||
+                  isAllValid
+                "
+              >
+                Your city is required.
+              </span> -->
+            </div>
+  
+            <div class="formInput" style="flex-grow: 1">
+              <label for="distributor_name">Distributor Name</label>
+              <input
+                type="text"
+                id="distributor_name"
+                formControlName="distributor_name"
+                placeholder="Enter your distributor name"
+                required
+              />
+            </div>
+          </div>       
+          <div class="pt-3 flex">
+            <button
+              type="submit"
+              class="btn btn-primary w-[140px] h-[40px] bg-[#ffffff] border-2 rounded-[8px] text-[#262626]"
+              (click)="resetData()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary w-[140px] h-[40px] bg-[#262060] rounded-[8px] text-[#ffffff] ml-[10px]"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

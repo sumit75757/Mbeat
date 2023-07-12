@@ -10,24 +10,32 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AuthModule } from '@auth0/auth0-angular';
-import { DistributerComponent } from './page/distributer/distributer.component';
-import { RetailerComponent } from './page/retailer/retailer.component';
+import { Error404Component } from './page/error404/error404.component';
+import { AddEditCityComponent } from './page/city/add-edit-city/add-edit-city.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrderComponent } from './page/order/order.component';
+import { FormPopupComponent } from './page/order/form-popup/form-popup.component';
+import { SharedModule } from './shared/shared/shared.module';
 
 let pwa :any =[]
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent, AuthComponent, DistributerComponent, RetailerComponent],
+  declarations: [AppComponent, NavigationComponent, AuthComponent, Error404Component, OrderComponent, FormPopupComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SharedModule,
     FormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
     AuthModule.forRoot({
       domain: environment.domain_name,
       clientId: environment.clint_Id,
       authorizationParams: {
-        redirect_uri: window.location.href
+        redirect_uri: window.location.origin
       }
     }),
     ...pwa

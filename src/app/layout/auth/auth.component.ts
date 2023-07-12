@@ -1,75 +1,95 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl ,Validators} from '@angular/forms';
-import { AuthService } from '@auth0/auth0-angular';
-
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiService } from 'src/app/service/auth/api.service';
+import swal from "sweetalert2";
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-  toggleForm:boolean = false
-  authForm:FormGroup = this.fb.group({
-    email:new FormControl('',Validators.email),
-    password:new FormControl('',Validators.required),
+  toggleForm: boolean = false;
+  authForm: FormGroup = this.fb.group({
+    Email: new FormControl('', Validators.email),
+    Password: new FormControl('', Validators.required),
   });
 
-  constructor(private fb :FormBuilder,public auth: AuthService) { }
+  constructor(
+    private fb: FormBuilder,
+    private auth: ApiService,
+    private spiner: NgxSpinnerService,
+    private Route : Router
+  ) {}
 
-  toggle(){
-    this.toggleForm = !this.toggleForm; 
-    this.fomrControladd()
+  toggle() {
+    this.toggleForm = !this.toggleForm;
+    this.fomrControladd();
   }
 
   ngOnInit() {
-    this.fomrControladd()
+    this.fomrControladd();
   }
 
-  fomrControladd(){
+  fomrControladd() {
     if (!this.toggleForm) {
-      this.authForm.removeControl('username')
-    }else{
-      this.authForm.addControl('username',new FormControl('',Validators.required))
+      this.authForm.removeControl('Name');
+    } else {
+      this.authForm.addControl(
+        'Name',
+        new FormControl('', Validators.required)
+      );
     }
   }
-  submit(){
+  submit() {
     if (this.authForm.valid) {
       if (!this.toggleForm) {
-        console.log("login",this.authForm.value);
-      }
-      else{
-        console.log("sinup",this.authForm.value);
+        this.spiner.show();
+        this.auth.singin(this.authForm.value).subscribe({
+          next: (res: any) => {
+            console.log(res.data);
+            swal.fire(res.message)
+            localStorage.setItem('userdata',JSON.stringify(res.data.findUser));
+            localStorage.setItem('token', JSON.stringify(res.data.token));
+            this.Route.navigate(['/'])
+            setTimeout(() => {
+              this.spiner.hide();
+            }, 600);
+          },
+          error: (err) => {
+            this.spiner.hide();
+            swal.fire(err.message)
+
+          },
+        });
+        console.log('sinup', this.authForm.value);
+        console.log('login', this.authForm.value);
+      } else {
+        this.spiner.show();
+        this.auth.singup(this.authForm.value).subscribe({
+          next: (res: any) => {
+            console.log(res.data);
+            swal.fire(res.message)
+            localStorage.setItem('userdata',JSON.stringify(this.authForm.value));
+            localStorage.setItem('token', JSON.stringify(res.data.token));
+            this.Route.navigate(['/'])
+            setTimeout(() => {
+              this.spiner.hide();
+            }, 600);
+          },
+          error: (err) => {
+            swal.fire(err.data)
+            this.spiner.hide();
+          },
+        });
+        console.log('sinup', this.authForm.value);
       }
     }
   }
- 
-  googleLogin() {
-    this.auth.loginWithPopup().subscribe(
-      (res) => {
-        console.log(res);
-        // this.auth.getAccessTokenSilently().subscribe(
-        //   (res) => {
-        //     localStorage.setItem('token', res);
-        //     console.log(res);
-        //   },
-        //   (err) => {
-        //     console.log('err', err);
-        //   }
-        // );
-        // this.auth.idTokenClaims$.subscribe(
-        //   (res) => {
-        //     console.log('id:', res);
-        //     localStorage.setItem('user', JSON.stringify(res));
-        //   },
-        //   (err) => {
-        //     console.log('err', err);
-        //   }
-        // );
-      },
-      (err) => {
-        console.log('err', err);
-      }
-    );
-  }
-
 }

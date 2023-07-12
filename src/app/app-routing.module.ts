@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { DistributerComponent } from './page/distributer/distributer.component';
+import { Error404Component } from './page/error404/error404.component';
+import { FormPopupComponent } from './page/order/form-popup/form-popup.component';
 
 const routes: Routes = [
   {
@@ -15,12 +17,33 @@ const routes: Routes = [
       },
       {
         path:"distributer",
-        component:DistributerComponent
+        loadChildren:()=>import('./page/distributer/distributer.module').then(m=>m.DistributerModule)
+      },
+      {
+        path:"retailer",
+        loadChildren:()=>import('./page/retailer/retailer.module').then(m=>m.RetailerModule)
+      },
+      {
+        path:"merchant",
+        loadChildren:()=>import('./page/seller/seller.module').then(m=>m.SellerModule)
+      },
+      {
+        path:"city",
+        loadChildren:()=>import('./page/city/city.module').then(m=>m.CityModule)
+      },
+      {
+        path:"order",
+        component:FormPopupComponent
       }
     ]
-  },{
+  },
+  {
     path:'auth',
     component:AuthComponent
+  },
+  {
+    path:'**',
+    component:Error404Component
   }
 ];
 
