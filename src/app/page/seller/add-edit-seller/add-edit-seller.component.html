@@ -24,11 +24,11 @@
             style="flex-wrap: wrap; gap: 20px"
           >
             <div class="formInput" style="flex-grow: 1">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="name">Full Name</label>
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="name">Product Name</label>
               <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 type="text"
                 id="name"
-                formControlName="name"
+                formControlName="ProductName"
                 placeholder="Enter your user name"
                 required
               />
@@ -45,11 +45,11 @@
             </div>
   
             <div class="formInput" style="flex-grow: 1">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="mobile">Mobile Number</label>
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="mobile">Product Catogary</label>
               <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                type="number"
+                type="text"
                 id="mobile"
-                formControlName="mobile"
+                formControlName="ProductCategory"
                 placeholder="Enter your mobile number"
                 required
               />
@@ -66,7 +66,7 @@
             </div>
           </div>
   
-          <div
+          <!-- <div
             class="flex sm:pt-0 sm:m-0"
             style="flex-wrap: wrap; gap: 20px; padding-top: 10px"
           >
@@ -80,17 +80,7 @@
                 required
               />
               
-              <!-- <span
-                class="error"
-                *ngIf="
-                  (f.controls.['address'].errors?.required &&
-                    (f.controls.['address'].dirty ||
-                      f.controls.['address'].touched)) ||
-                  isAllValid
-                "
-              >
-                Your address is required.
-              </span> -->
+             
             </div>
   
             <div class="formInput" style="flex-grow: 1">
@@ -102,16 +92,7 @@
                 placeholder="Enter your city"
                 required
               />
-              <!-- <span
-                class="error"
-                *ngIf="
-                  (f.controls.['city'].errors?.required &&
-                    (f.controls.['city'].dirty || f.controls.['city'].touched)) ||
-                  isAllValid
-                "
-              >
-                Your city is required.
-              </span> -->
+              
             </div>
             <div class="formInput" style="flex-grow: 1">
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="state">State</label>
@@ -122,16 +103,7 @@
                 placeholder="Enter your state"
                 required
               />
-              <!-- <span
-                class="error"
-                *ngIf="
-                  (f.controls.['state'].errors?.required &&
-                    (f.controls.['state'].dirty || f.controls.['state'].touched)) ||
-                  isAllValid
-                "
-              >
-                Your state is required.
-              </span> -->
+            
             </div>
           </div>
           <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
@@ -143,16 +115,7 @@
               placeholder="Enter your zipcode"
               required
             />
-            <!-- <span
-              class="error"
-              *ngIf="
-                (f.controls.['zipcode'].errors?.required &&
-                  (f.controls.['zipcode'].dirty || f.controls.['zipcode'].touched)) ||
-                isAllValid
-              "
-            >
-              Your zipcode is required.
-            </span> -->
+        
           </div>
           <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="mobilenumber">Mobile Number</label>
@@ -163,16 +126,7 @@
               placeholder="Enter your mobile number"
               required
             />
-            <!-- <span
-              class="error"
-              *ngIf="
-                (f.controls.['mobilenumber'].errors?.required &&
-                  (f.controls.['mobilenumber'].dirty || f.controls.['mobilenumber'].touched)) ||
-                isAllValid
-              "
-            >
-              Your mobile number is required.
-            </span> -->
+         
           </div>
   
           <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
@@ -183,16 +137,7 @@
               formControlName="gstnumber"
               placeholder="Enter your gst number"
             />
-            <!-- <span
-              class="error"
-              *ngIf="
-                (f.controls.['gstnumber'].errors?.required &&
-                  (f.controls.['gstnumber'].dirty || f.controls.['gstnumber'].touched)) ||
-                isAllValid
-              "
-            >
-              Your gst number is required.
-            </span> -->
+         
           </div>
           <div  class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="bankname">Bank Name</label>
@@ -202,16 +147,7 @@
               formControlName="bankname"
               placeholder="Enter bank name"
             />
-            <!-- <span
-              class="error"
-              *ngIf="
-                (f.controls.['bankname'].errors?.required &&
-                  (f.controls.['bankname'].dirty || f.controls.['bankname'].touched)) ||
-                isAllValid
-              "
-            >
-              User bank name required.
-            </span> -->
+            
           </div>
           <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="ifsccode">IFSC Code</label>
@@ -221,16 +157,7 @@
               formControlName="ifsccode"
               placeholder="Enter your ifsc code "
             />
-            <!-- <span
-              class="error"
-              *ngIf="
-                (f.controls.['ifsccode'].errors?.required &&
-                  (f.controls.['ifsccode'].dirty || f.controls.['ifsccode'].touched)) ||
-                isAllValid
-              "
-            >
-              Your ifsc code is required.
-            </span> -->
+           
           </div>
           <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="cheque_number1">Cheque Number 1</label>
@@ -240,16 +167,7 @@
               formControlName="cheque_number1"
               placeholder="Enter your cheque number 1"
             />
-            <!-- <span
-              class="error"
-              *ngIf="
-                (f.controls.['cheque_number1'].errors?.required &&
-                  (f.controls.['cheque_number1'].dirty || f.controls.['cheque_number1'].touched)) ||
-                isAllValid
-              "
-            >
-              Your cheque number 1 is required.
-            </span> -->
+          
           </div>
           <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="cheque_number2">Cheque Number 2</label>
@@ -259,17 +177,7 @@
               formControlName="cheque_number2"
               placeholder="Enter your cheque number 2"
             />
-            <!-- <span
-              class="error"
-              *ngIf="
-                (f.controls.['cheque_number2'].errors?.required &&
-                  (f.controls.['cheque_number2'].dirty || f.controls.['cheque_number2'].touched)) ||
-                isAllValid
-              "
-            >
-              Your cheque number 2 is required.
-            </span> -->
-          </div>
+          </div> -->
           <div class="pt-3 flex justify-end">
             <button
               type="submit"

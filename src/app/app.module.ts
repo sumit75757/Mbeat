@@ -14,14 +14,13 @@ import { Error404Component } from './page/error404/error404.component';
 import { AddEditCityComponent } from './page/city/add-edit-city/add-edit-city.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OrderComponent } from './page/order/order.component';
 import { FormPopupComponent } from './page/order/form-popup/form-popup.component';
 import { SharedModule } from './shared/shared/shared.module';
 
 let pwa :any =[]
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent, AuthComponent, Error404Component, OrderComponent, FormPopupComponent ],
+  declarations: [AppComponent, NavigationComponent, AuthComponent, Error404Component, FormPopupComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

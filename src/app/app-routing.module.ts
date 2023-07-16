@@ -24,7 +24,7 @@ const routes: Routes = [
         loadChildren:()=>import('./page/retailer/retailer.module').then(m=>m.RetailerModule)
       },
       {
-        path:"merchant",
+        path:"product",
         loadChildren:()=>import('./page/seller/seller.module').then(m=>m.SellerModule)
       },
       {
@@ -33,7 +33,8 @@ const routes: Routes = [
       },
       {
         path:"order",
-        component:FormPopupComponent
+        loadChildren:()=>import('./page/order/order.module').then(m=>m.OrderModule)
+
       }
     ]
   },

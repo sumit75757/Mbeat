@@ -23,14 +23,16 @@ export class NavigationComponent implements OnInit {
       name: 'Distributer',
       icon: 'fa-solid fa-building-circle-arrow-right',
       route: '/distributer',
-    },{
+    },
+    {
       name: 'Retailer',
       icon: 'fa-solid fa-store',
       route: '/retailer',
-    },{
-      name: 'Merchant',
+    },
+    {
+      name: 'Product',
       icon: 'fa-solid fa-users',
-      route: '/merchant',
+      route: '/product',
     },
     {
       name: 'order',
@@ -43,18 +45,56 @@ export class NavigationComponent implements OnInit {
     public auth: AuthService,
     private http: HttpClient,
     private meta: Meta,
-    private route:Router
-  ) {}
-  user:any
-  ngOnInit(): void {
+    private route: Router
+  ) {
     this.isDarkEnable = JSON.parse(localStorage.getItem('theme') + '');
     this.user = JSON.parse(localStorage.getItem('userdata') + '');
-    if (this.user.Role == "Admin") {
+    if (this.user.Role == 'Salesmen') {
+      this.routeConfig = [
+        {
+          name: 'Product',
+          icon: 'fa-solid fa-users',
+          route: '/product',
+        },
+      ];
+    } else if (this.user.Role == 'Admin') {
+      this.routeConfig = [
+        {
+          name: 'Deshbord',
+          icon: 'fa-solid fa-house',
+          route: '/',
+        },
+        {
+          name: 'Distributer',
+          icon: 'fa-solid fa-building-circle-arrow-right',
+          route: '/distributer',
+        },
+        {
+          name: 'Retailer',
+          icon: 'fa-solid fa-store',
+          route: '/retailer',
+        },
+        {
+          name: 'Product',
+          icon: 'fa-solid fa-users',
+          route: '/product',
+        },
+        {
+          name: 'order',
+          icon: 'fa-solid fa-cart-shopping',
+          route: '/order',
+        },
+      ];
+    }
+  }
+  user: any;
+  ngOnInit(): void {
+    if (this.user.Role == 'Admin') {
       this.routeConfig.push({
         name: 'City',
         icon: 'fa-solid fa-city',
         route: '/city',
-      })
+      });
     }
     this.addClassToBody();
   }
@@ -113,7 +153,7 @@ export class NavigationComponent implements OnInit {
   }
 
   logout() {
-    this.route.navigate(['/auth'])
+    this.route.navigate(['/auth']);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
   }

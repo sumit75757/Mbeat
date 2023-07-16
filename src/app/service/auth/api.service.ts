@@ -56,6 +56,10 @@ export class ApiService {
   deleteDistributor(id:any){
     return this.http.delete(this.bashUrl+"Distributor/deleteDistributor?DistributorId="+id,{headers:this.headers})
   }
+  getDistributorbyCity(id:any){
+    return this.http.get(this.bashUrl+"city/getDistributorFromCity?CityId="+id,{headers:this.headers})
+
+  }
 
   addMerchant(data:any){
     return this.http.post(this.bashUrl+"merchant/insertMerchant",data,{headers:this.headers})
@@ -76,6 +80,31 @@ export class ApiService {
 
   assingRoles(id:any,data:any){
     return this.http.post(this.bashUrl+"user/assignRole?UserId="+id,data,{headers:this.headers})
+  }
+
+  getmurchant(id:any){
+    return this.http.get(this.bashUrl+"city/getMerchantFromDistributor?DistributorId="+id,{headers:this.headers})
+  }
+  
+  insertProduct(data:any){
+    return this.http.post(this.bashUrl+'product/insertProduct',data,{headers:this.headers})
+  }
+
+  getproduct(){
+    return this.http.get(this.bashUrl+'product/getProducts',{headers:this.headers})
+  }
+  updateProduct(id:any,data:any){
+    return this.http.post(this.bashUrl+'product/insertProduct/'+id,data,{headers:this.headers})
+  }
+  deleteProduct(id:any){
+    return this.http.get(this.bashUrl+'order/deleteOrder?CityId='+id,{headers:this.headers})
+  }
+  getbyproduct(id:any){
+    return this.http.get(this.bashUrl+'product/getProducts?ProductId='+id,{headers:this.headers})
+  }
+
+  addorder(data:any){
+    return this.http.post(this.bashUrl+'order/insertOrder',data,{headers:this.headers})
   }
 
 }

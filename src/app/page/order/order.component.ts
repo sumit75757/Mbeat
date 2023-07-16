@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -7,22 +8,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  orderForm!: FormGroup;
-  isAllValid!:boolean;
-  constructor(fb: FormBuilder) {
-    this.orderForm = fb.group({
-      city: ['', [Validators.required]],
-      distributor_name: ['', [Validators.required]],
-    });
-   }
-
+  constructor(private  activeRoute:ActivatedRoute ){}
   ngOnInit(): void {
-  }
-  formSubmit(){
-
+    this.activeRoute.params.subscribe((params)=>{
+      
+      
+    })
   }
   
-  resetData() {
-    this.orderForm.reset();
-  }
+
 }
