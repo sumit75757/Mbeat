@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { AuthComponent } from './layout/auth/auth.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -16,6 +16,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormPopupComponent } from './page/order/form-popup/form-popup.component';
 import { SharedModule } from './shared/shared/shared.module';
+import { InterceptorInterceptor } from './service/interceptor.interceptor';
 
 let pwa :any =[]
 
@@ -39,7 +40,11 @@ let pwa :any =[]
     }),
     ...pwa
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:InterceptorInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {
