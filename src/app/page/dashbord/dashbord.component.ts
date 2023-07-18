@@ -36,22 +36,18 @@ export class DashbordComponent implements OnInit {
   }
   roles=[
     'Admin',
-    "Distributer",
-    "Merchnat",
-    "seller"
+    "Salesmen"
 
   ]
   changeLeagueOwner(event:any,id:any){
-    console.log(event);
-    
     this.api.assingRoles(id,{Role:event}).subscribe({ 
       next: (res: any) => {
-      Swal.fire(res.message)
+      Swal.fire('User Updated')
       this.spinner.hide();
     },
     error: (err) => {
       console.log(err);
-      Swal.fire(err.message)
+      Swal.fire('Something Wrong')
       this.spinner.hide();
     },})
   }

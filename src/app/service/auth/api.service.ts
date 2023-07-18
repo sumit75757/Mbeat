@@ -16,6 +16,9 @@ export class ApiService {
   singin(data:any){
     return this.http.post(this.bashUrl+"user/login",data)
   }
+  me(data:any){
+    return this.http.get(this.bashUrl+"user/me",data)
+  }
   getAllUser(){
     console.log(this.headers);
     
@@ -105,6 +108,11 @@ export class ApiService {
 
   addorder(data:any){
     return this.http.post(this.bashUrl+'order/insertOrder',data,{headers:this.headers})
+  }
+
+  addcaogory(data:any){
+    return this.http.post(this.bashUrl+'product/insertProductCategory',data,{headers:this.headers})
+
   }
 
 }

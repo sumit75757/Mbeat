@@ -19,18 +19,9 @@ export class AddEditSellerComponent implements OnInit {
 
   sellerForm: FormGroup = this.fb.group({
     ProductName: ['', [Validators.required]],
-    ProductCategory: ['', [Validators.required]],
-    // address:['',[Validators.required]],
-    // city: ['', [Validators.required]],
-    // state:['',[Validators.required]],
-    // zipcode: ['', [Validators.required]],
-    // mobilenumber: ['', [Validators.required]],
-    // gstnumber: ['', [Validators.required]],
-    // bankname: ['', [Validators.required]],
-    // ifsccode: ['',[Validators.required]],
-    // cheque_number1: ['',[Validators.required]],
-    // cheque_number2: ['',[Validators.required]],
   });
+
+
 
   id: any;
   ngOnInit(): void {

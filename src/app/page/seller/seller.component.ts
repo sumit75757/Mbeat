@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/service/auth/api.service';
 import Swal from 'sweetalert2';
 
@@ -8,12 +10,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./seller.component.scss'],
 })
 export class SellerComponent implements OnInit {
-  constructor(private api: ApiService) {}
+  constructor(
+    private fb: FormBuilder,
+    private api: ApiService,
+    private Route: Router,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   product: any;
 
   ngOnInit(): void {
-    this.getProduct()
+    this.getProduct();
   }
   getProduct() {
     this.api.getproduct().subscribe({
@@ -47,5 +54,28 @@ export class SellerComponent implements OnInit {
         });
       }
     });
+  }
+  id :any
+  catogroyForm: FormGroup = this.fb.group({
+    ProductId: ['', [Validators.required]],
+    ProductCategory: ['', [Validators.required]],
+  });
+  resetData() {
+    this.catogroyForm.reset();
+  }
+  formSubmit() {
+    this.catogroyForm.controls['ProductId'].setValue(this.id)
+    if (this.catogroyForm.valid) {
+      this.api.addcaogory(this.catogroyForm.value).subscribe({
+        next: (res: any) => {
+          Swal.fire(res.message);
+          this.id = ''
+        },
+        error: (err) => {
+          console.log(err);
+          Swal.fire(err.message);
+        },
+      });
+    }
   }
 }
