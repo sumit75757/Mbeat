@@ -21,15 +21,18 @@ export class AppComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     let user = JSON.parse(localStorage.getItem('userdata') + '');
-    if (!user.Role) {
-      this.api.me({ Name: user.Name, Email: user.Email }).subscribe({
-        next: (res: any) => {
-          localStorage.setItem('userdata', JSON.stringify(res.data));
-        },
-        error: (err) => {
-          Swal.fire(err.message);
-        },
-      });
+    let token = JSON.parse(localStorage.getItem('token') + '');
+    if (token) {
+      if (!user.Role && user && token) {
+        this.api.me({ Name: user.Name, Email: user.Email }).subscribe({
+          next: (res: any) => {
+            localStorage.setItem('userdata', JSON.stringify(res.data));
+          },
+          error: (err) => {
+            Swal.fire(err.message);
+          },
+        });
+      }
     }
     if (!localStorage.getItem('token')) {
       this.route.navigate(['/auth']);
