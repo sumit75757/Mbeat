@@ -4,7 +4,10 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class ApiService {
-  bashUrl:string = "http://localhost:8000/api/"
+  // bashUrl:string = "http://localhost:8000/api/"
+  bashUrl:string = "https://mbeatapi.onrender.com/api/"
+
+  
   constructor(private http :HttpClient) { }
   headers:any = {
     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token')+'')}`
