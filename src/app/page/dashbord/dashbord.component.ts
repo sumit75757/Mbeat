@@ -4,18 +4,23 @@ import { take } from 'rxjs/operators';
 import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import swal from "sweetalert2";
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
   styleUrls: ['./dashbord.component.scss'],
 })
 export class DashbordComponent implements OnInit {
-  constructor(private api: ApiService, private spinner: NgxSpinnerService) {}
+  constructor(private api: ApiService,private route:Router, private spinner: NgxSpinnerService) {}
   list: number = 10;
   users: any;
   ngOnInit(): void {
     this.spinner.show();
     this.getdata()
+    let data:any = localStorage.getItem('userdata')
+    if (data.Role == 'Salesmen') {
+      this.route.navigate(['/order'])
+    }
   }
   role:any
   getdata() {
@@ -28,7 +33,7 @@ export class DashbordComponent implements OnInit {
           this.spinner.hide();
         },
         error: (err) => {
-          console.log(err);
+          //console.log(err);
           swal.fire(err.message)
           this.spinner.hide();
         },
@@ -46,7 +51,7 @@ export class DashbordComponent implements OnInit {
       this.spinner.hide();
     },
     error: (err) => {
-      console.log(err);
+      //console.log(err);
       Swal.fire('Something Wrong')
       this.spinner.hide();
     },})

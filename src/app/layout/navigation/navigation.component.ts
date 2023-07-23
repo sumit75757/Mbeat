@@ -15,19 +15,14 @@ export class NavigationComponent implements OnInit {
   token: any = localStorage.getItem('token');
   routeConfig = [
     {
-      name: 'Deshbord',
+      name: 'Dashboard',
       icon: 'fa-solid fa-house',
       route: '/',
     },
     {
-      name: 'Distributer',
-      icon: 'fa-solid fa-building-circle-arrow-right',
-      route: '/distributer',
-    },
-    {
-      name: 'Retailer',
-      icon: 'fa-solid fa-store',
-      route: '/retailer',
+      name: 'City',
+      icon: 'fa-solid fa-city',
+      route: '/city',
     },
     {
       name: 'Product',
@@ -35,9 +30,19 @@ export class NavigationComponent implements OnInit {
       route: '/product',
     },
     {
-      name: 'order',
+      name: 'Order',
       icon: 'fa-solid fa-cart-shopping',
       route: '/order',
+    },
+    {
+      name: 'Distributer',
+      icon: 'fa-solid fa-building-circle-arrow-right',
+      route: '/distributer',
+    },
+    {
+      name: 'Merchant',
+      icon: 'fa-solid fa-store',
+      route: '/retailer',
     },
   ];
 
@@ -52,17 +57,37 @@ export class NavigationComponent implements OnInit {
     if (this.user.Role == 'Salesmen') {
       this.routeConfig = [
         {
-          name: 'Product',
-          icon: 'fa-solid fa-users',
-          route: '/product',
+          name: 'Order',
+          icon: 'fa-solid fa-cart-shopping',
+          route: '/order',
+        },
+        {
+          name: 'Merchant',
+          icon: 'fa-solid fa-store',
+          route: '/retailer',
         },
       ];
     } else if (this.user.Role == 'Admin') {
       this.routeConfig = [
         {
-          name: 'Deshbord',
+          name: 'Dashboard',
           icon: 'fa-solid fa-house',
           route: '/',
+        },
+        {
+          name: 'City',
+          icon: 'fa-solid fa-city',
+          route: '/city',
+        },
+        {
+          name: 'Product',
+          icon: 'fa-solid fa-users',
+          route: '/product',
+        },
+        {
+          name: 'Order',
+          icon: 'fa-solid fa-cart-shopping',
+          route: '/order',
         },
         {
           name: 'Distributer',
@@ -70,43 +95,29 @@ export class NavigationComponent implements OnInit {
           route: '/distributer',
         },
         {
-          name: 'Retailer',
+          name: 'Merchant',
           icon: 'fa-solid fa-store',
           route: '/retailer',
-        },
-        {
-          name: 'Product',
-          icon: 'fa-solid fa-users',
-          route: '/product',
-        },
-        {
-          name: 'order',
-          icon: 'fa-solid fa-cart-shopping',
-          route: '/order',
         },
       ];
     }
   }
   user: any;
   ngOnInit(): void {
-    if (this.user.Role == 'Admin') {
-      this.routeConfig.push({
-        name: 'City',
-        icon: 'fa-solid fa-city',
-        route: '/city',
-      });
-    }
     this.addClassToBody();
   }
   changeTheme() {
     this.isDarkEnable = !this.isDarkEnable;
-    console.log(this.isDarkEnable);
+    //console.log(this.isDarkEnable);
     localStorage.setItem('theme', JSON.stringify(this.isDarkEnable));
     this.addClassToBody();
   }
   toggle() {
     this.sidebar = !this.sidebar;
-    console.log(this.sidebar);
+    //console.log(this.sidebar);
+  }
+  toggleClose(){
+    this.sidebar = false;
   }
 
   addClassToBody() {
@@ -125,29 +136,29 @@ export class NavigationComponent implements OnInit {
   googleLogin() {
     this.auth.loginWithPopup().subscribe(
       (res) => {
-        console.log(res);
+        //console.log(res);
         this.auth.getAccessTokenSilently().subscribe(
           (res) => {
             localStorage.setItem('token', res);
 
-            console.log(res);
+            //console.log(res);
           },
           (err) => {
-            console.log('err', err);
+            //console.log('err', err);
           }
         );
         this.auth.idTokenClaims$.subscribe(
           (res) => {
-            console.log('id:', res);
+            //console.log('id:', res);
             localStorage.setItem('user', JSON.stringify(res));
           },
           (err) => {
-            console.log('err', err);
+            //console.log('err', err);
           }
         );
       },
       (err) => {
-        console.log('err', err);
+        //console.log('err', err);
       }
     );
   }

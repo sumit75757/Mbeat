@@ -32,7 +32,7 @@
                   scope="col"
                   class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                 >
-                Add Product Category
+                  Add Product Category
                 </th>
 
                 <!-- <th
@@ -48,7 +48,12 @@
                 >
                   Email address
                 </th> -->
-
+                <th
+                scope="col"
+                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+              >
+                Category
+              </th>
                 <th
                   scope="col"
                   class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
@@ -68,17 +73,28 @@
                 <td
                   class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
                 >
-                  {{item.ProductName}}
+                  {{ item.ProductName }}
                 </td>
                 <td
                   class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
                 >
-                <button (click)="id = item.ProductId"><i class="fa fa-plus"></i>Add Category</button>
+                  <button (click)="resetData();id = item.ProductId">
+                    <i class="fa fa-plus"></i>Add Category
+                  </button>
+                </td>
+                <td
+                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
+                >
+                  <div *ngFor="let cat of item.product_category">
+                    <div (click)="updatecat(item.ProductId, cat)">
+                      {{ cat.ProductCategory }}
+                    </div>
+                  </div>
                 </td>
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                   <div class="flex items-center gap-x-6">
                     <button
-                    (click)="delete(item.ProductId)"
+                      (click)="deletee(item.ProductId)"
                       class="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
                     >
                       <svg
@@ -97,8 +113,8 @@
                       </svg>
                     </button>
 
-                    <a  
-                      routerLink="edit/{{item.ProductId}}"
+                    <a
+                      routerLink="edit/{{ item.ProductId }}"
                       class="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none"
                     >
                       <svg
@@ -126,7 +142,6 @@
     </div>
   </div>
 </section>
-
 
 <div
   *ngIf="id"
@@ -183,8 +198,11 @@
                           for="city"
                           >Category</label
                         >
-                        <input type="text"  formControlName="ProductCategory" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                       
+                        <input
+                          type="text"
+                          formControlName="ProductCategory"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
                       </div>
                     </div>
                   </form>
@@ -195,6 +213,23 @@
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
           <button
+            *ngIf="catID"
+            (click)="Update()"
+            type="button"
+            class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+          >
+            Update
+          </button>
+          <button
+            *ngIf="catID"
+            (click)="removecat()"
+            type="button"
+            class="mt-3 mx-2 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+          >
+            Delete
+          </button>
+          <button
+            *ngIf="!catID"
             (click)="formSubmit()"
             type="button"
             class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"

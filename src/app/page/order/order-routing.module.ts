@@ -9,8 +9,8 @@ const routes: Routes = [
     component: OrderComponent,
   },
   {
-    path: 'add/:id',
-    component: OrderComponent,
+    path: 'edit/:id',
+    component: FormPopupComponent,
   },
   {
     path: 'orderform',

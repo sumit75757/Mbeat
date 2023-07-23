@@ -14,7 +14,7 @@
       <h2
         class="text-lg mb-3 font-semibold text-gray-700 capitalize dark:text-white"
       >
-        Account settings
+        Distributor
       </h2>
       <form
         [formGroup]="distributorForm"
@@ -25,6 +25,7 @@
         <!-- <div class="" style="width: 150px; ">
             <img src="" alt="Header image" />
           </div> -->
+          
         <div
           class="flex mt-1 sm:pt-0 sm:m-0"
           style="flex-wrap: wrap; gap: 20px"
@@ -147,7 +148,7 @@
             for="city"
             >City</label
           >
-          <ng-select formControlName="CityId" [items]="citys" bindLabel="CityName" bindValue="CityId">
+          <ng-select formControlName="CityId" [items]="citys" bindLabel="CityArea" bindValue="CityId">
           </ng-select>
           
           <!-- <span
@@ -159,6 +160,115 @@
               "
             >
               Your city is required.
+            </span> -->
+        </div>
+
+        <div class="formInput" style="flex-grow: 1">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="bank"
+            >BankName</label
+          >
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            id="bank"
+            formControlName="BankName"
+            placeholder="Enter your bank name"
+            required
+          />
+
+          <!-- <span
+              class="error"
+              *ngIf="
+                (f.controls.['address'].errors?.required &&
+                  (f.controls.['address'].dirty ||
+                    f.controls.['address'].touched)) ||
+                isAllValid
+              "
+            >
+              Your address is required.
+            </span> -->
+        </div>
+        <div class="formInput" style="flex-grow: 1">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="ifsc"
+            >IFSC Code</label
+          >
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            id="address"
+            formControlName="IFSCCode"
+            placeholder="Enter your IFSC code"
+            required
+          />
+
+          <!-- <span
+              class="error"
+              *ngIf="
+                (f.controls.['address'].errors?.required &&
+                  (f.controls.['address'].dirty ||
+                    f.controls.['address'].touched)) ||
+                isAllValid
+              "
+            >
+              Your address is required.
+            </span> -->
+        </div>
+        <div class="formInput" style="flex-grow: 1">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="address"
+            >Check Number 1</label
+          >
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            id="check1"
+            formControlName="ChequeNumber1"
+            placeholder="Enter your checknumber 1"
+            required
+          />
+
+          <!-- <span
+              class="error"
+              *ngIf="
+                (f.controls.['address'].errors?.required &&
+                  (f.controls.['address'].dirty ||
+                    f.controls.['address'].touched)) ||
+                isAllValid
+              "
+            >
+              Your address is required.
+            </span> -->
+        </div>
+        <div class="formInput" style="flex-grow: 1">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            for="address"
+            >Check Number 2</label
+          >
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            id="check2"
+            formControlName="ChequeNumber2"
+            placeholder="Enter your Checknumber 2"
+            required
+          />
+
+          <!-- <span
+              class="error"
+              *ngIf="
+                (f.controls.['address'].errors?.required &&
+                  (f.controls.['address'].dirty ||
+                    f.controls.['address'].touched)) ||
+                isAllValid
+              "
+            >
+              Your address is required.
             </span> -->
         </div>
    

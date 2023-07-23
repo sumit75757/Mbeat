@@ -21,17 +21,17 @@ export class AddEditSellerComponent implements OnInit {
     ProductName: ['', [Validators.required]],
   });
 
-
-
   id: any;
   ngOnInit(): void {
     this.activeRoute.params.subscribe((params: any) => {
       this.id = params.id;
-      this.api.getbyproduct(params.id).subscribe({
-        next:(value:any)=> {
-          this.sellerForm.patchValue(value.data)
-        },
-      })
+      if (this.id) {
+        this.api.getbyproduct(params.id).subscribe({
+          next: (value: any) => {
+            this.sellerForm.patchValue(value.data[0]);
+          },
+        });
+      }
     });
   }
   get f() {
@@ -49,21 +49,22 @@ export class AddEditSellerComponent implements OnInit {
             this.Route.navigate(['/product']);
           },
           error: (err) => {
-            console.log(err);
+            //console.log(err);
+            Swal.fire(err.message);
+          },
+        });
+      } else {
+        this.api.insertProduct(this.sellerForm.value).subscribe({
+          next: (res: any) => {
+            Swal.fire(res.message);
+            this.Route.navigate(['/product']);
+          },
+          error: (err) => {
+            //console.log(err);
             Swal.fire(err.message);
           },
         });
       }
-      this.api.insertProduct(this.sellerForm.value).subscribe({
-        next: (res: any) => {
-          Swal.fire(res.message);
-          this.Route.navigate(['/product']);
-        },
-        error: (err) => {
-          console.log(err);
-          Swal.fire(err.message);
-        },
-      });
     }
   }
 }

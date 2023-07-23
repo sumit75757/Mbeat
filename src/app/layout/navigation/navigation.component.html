@@ -37,7 +37,7 @@
       </div>
       <div class="flex items-center">
         <div class="flex items-center ml-3">
-          <button class="" (click)="changeTheme()">
+          <!-- <button class="" (click)="changeTheme()">
             <i
               *ngIf="!isDarkEnable"
               style="color: rgb(156 163 175)"
@@ -48,7 +48,7 @@
               style="color: rgb(229 231 235)"
               class="w-10 text-lg fa-solid fa-sun"
             ></i>
-          </button>
+          </button> -->
           <div
             class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
             id="dropdown-user"
@@ -89,14 +89,14 @@
 >
   <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
     <ul class="space-y-2 font-medium">
-      <li *ngFor="let rout of routeConfig" [routerLink]="rout.route" class="flex p-2 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-        <a
-        [routerLink]="rout.route"
+      <li *ngFor="let rout of routeConfig" (click)="toggleClose()" [routerLink]="rout?.route" class="flex p-2 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+        <a (click)="toggleClose()"
+        [routerLink]="rout?.route"
         class="flex items-center text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
         >
-        <i [class]='rout.icon' class="flex items-center m-2" ></i>
+        <i [class]='rout?.icon' class="flex items-center m-2" ></i>
 
-          <span class="">{{rout.name}}</span>
+          <span class="">{{rout?.name}}</span>
         </a>
       </li>
       

@@ -26,6 +26,10 @@ export class AddEditDistributerComponent implements OnInit {
     DistributorTelNo: ['', [Validators.required]],
     DistributorAddress: ['', [Validators.required]],
     DistributorCity: ['', [Validators.required]],
+    BankName:[''],
+    IFSCCode:[''],
+    ChequeNumber1:[''],
+    ChequeNumber2:[''],
   });
 
   id: any;
@@ -46,7 +50,7 @@ export class AddEditDistributerComponent implements OnInit {
         this.spinner.hide();
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         Swal.fire(err.message);
         this.spinner.hide();
       },
@@ -61,7 +65,6 @@ export class AddEditDistributerComponent implements OnInit {
   formSubmit() {
     this.distributorForm.controls['DistributorCity'].setValue(this.distributorForm.controls['CityId'].value)
     this.spinner.show();
-    debugger
     if (!this.id) {
       if (this.distributorForm.valid) {
         this.api.addDistributor(this.distributorForm.value).subscribe({
@@ -77,6 +80,8 @@ export class AddEditDistributerComponent implements OnInit {
         });
       }
     } else {
+      //console.log(this.distributorForm.value);
+      
       if (this.distributorForm.valid) {
         this.api
           .updateDistributor(this.id, this.distributorForm.value)

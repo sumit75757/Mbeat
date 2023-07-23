@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/service/auth/api.service';
-import swal from "sweetalert2";
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-edit-city',
@@ -17,60 +17,88 @@ export class AddEditCityComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private route: Router,
     private ActiveRoute: ActivatedRoute
-  ) {}
-
-  cityForm: FormGroup = this.fb.group({
-    State: ['', [Validators.required]],
-    District: ['', [Validators.required]],
-    CityName: ['', [Validators.required]],
-  });
-  id: any;
-  ngOnInit(): void {
+  ) {
     this.ActiveRoute.params.subscribe((params: any) => {
       this.id = params.id;
-      this.api.getCitybyid(this.id).subscribe((res: any) => {
-        console.log(res);
-        this.cityForm.patchValue(res.data);
-      });
+      if (this.id) {
+        this.cityForm = this.fb.group({
+          State: ['', [Validators.required]],
+          CityName: ['', [Validators.required]],
+          CityArea: ['', [Validators.required]]
+        });
+      } else {
+        this.cityForm = this.fb.group({
+          State: ['', [Validators.required]],
+          CityName: ['', [Validators.required]],
+          CityArea: this.fb.array([]),
+        });
+      }
+      if (this.id) {
+        this.api.getCitybyid(this.id).subscribe((res: any) => {
+          this.cityForm.patchValue(res.data);
+        });
+      } else {
+      }
     });
+  }
+
+  cityForm!: FormGroup 
+  initForm() {
+    
+  }
+  id: any;
+  ngOnInit(): void {
+    
+  }
+  get cityAreas() {
+    return this.cityForm.get('CityArea') as FormArray;
+  }
+
+  addCreds() {
+    this.cityAreas.push(this.fb.control(''));
   }
 
   get f() {
     return this.cityForm.controls;
   }
+
   resetData() {
     this.cityForm.reset();
   }
   formSubmit() {
-    this.spinner.show();
+    // this.spinner.show();
+    //console.log(this.cityForm.value);
     if (!this.id) {
       if (this.cityForm.valid) {
         this.api.addCity(this.cityForm.value).subscribe({
-          next: (res:any) => {
-            swal.fire(res.message)
+          next: (res: any) => {
+            swal.fire(res.message);
             this.spinner.hide();
             this.route.navigate(['/city']);
           },
           error: (err) => {
-            swal.fire(err.message)
+            swal.fire(err.message);
             this.spinner.hide();
           },
         });
       }
-    }else{
+    } else {
       if (this.cityForm.valid) {
-        this.api.updateCity(this.id,this.cityForm.value).subscribe({
-          next: (res:any) => {
-            swal.fire(res.message)
+        this.api.updateCity(this.id, this.cityForm.value).subscribe({
+          next: (res: any) => {
+            swal.fire(res.message);
             this.spinner.hide();
             this.route.navigate(['/city']);
           },
           error: (err) => {
-            swal.fire(err.message)
+            swal.fire(err.message);
             this.spinner.hide();
           },
         });
       }
     }
+  }
+  removeField(index: number) {
+    this.cityAreas.removeAt(index);
   }
 }

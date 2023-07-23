@@ -17,6 +17,7 @@ import swal from "sweetalert2";
 export class AuthComponent implements OnInit {
   toggleForm: boolean = false;
   authForm: FormGroup = this.fb.group({
+    Role:new FormControl('Salesmen', Validators.required),
     Email: new FormControl('', Validators.email),
     Password: new FormControl('', Validators.required),
   });
@@ -48,12 +49,13 @@ export class AuthComponent implements OnInit {
     }
   }
   submit() {
+    //console.log(this.authForm.value,this.toggleForm);
     if (this.authForm.valid) {
       if (!this.toggleForm) {
         this.spiner.show();
         this.auth.singin(this.authForm.value).subscribe({
           next: (res: any) => {
-            console.log(res.data);
+            //console.log(res.data);
             swal.fire(res.message)
             localStorage.setItem('userdata',JSON.stringify(res.data.findUser));
             localStorage.setItem('token', JSON.stringify(res.data.token));
@@ -68,13 +70,13 @@ export class AuthComponent implements OnInit {
 
           },
         });
-        console.log('sinup', this.authForm.value);
-        console.log('login', this.authForm.value);
+        //console.log('sinup', this.authForm.value);
+        //console.log('login', this.authForm.value);
       } else {
         this.spiner.show();
         this.auth.singup(this.authForm.value).subscribe({
           next: (res: any) => {
-            console.log(res.data);
+            //console.log(res.data);
             swal.fire(res.message)
             localStorage.setItem('userdata',JSON.stringify(this.authForm.value));
             localStorage.setItem('token', JSON.stringify(res.data.token));
@@ -88,7 +90,7 @@ export class AuthComponent implements OnInit {
             this.spiner.hide();
           },
         });
-        console.log('sinup', this.authForm.value);
+        //console.log('sinup', this.authForm.value);
       }
     }
   }

@@ -35,17 +35,20 @@ export class AddEditRetailerComponent implements OnInit {
     this.getDistributor();
     this.ActiveRoute.params.subscribe((params: any) => {
       this.id = params.id;
-      this.api.getMerchantbyid(this.id).subscribe({
-        next: (res: any) => {
-          this.retailerForm.patchValue(res.data);
-          this.spinner.hide();
-        },
-        error: (err) => {
-          console.log(err);
-          Swal.fire(err.message);
-          this.spinner.hide();
-        },
-      });
+      if (this.id) {
+        this.api.getMerchantbyid(this.id).subscribe({
+          next: (res: any) => {
+            this.retailerForm.patchValue(res.data);
+            this.spinner.hide();
+          },
+          error: (err) => {
+            //console.log(err);
+            Swal.fire(err.message);
+            this.spinner.hide();
+          },
+        });
+      } 
+      
     });
   }
   citys: any;
@@ -56,7 +59,7 @@ export class AddEditRetailerComponent implements OnInit {
         this.spinner.hide();
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         Swal.fire(err.message);
         this.spinner.hide();
       },
@@ -71,7 +74,7 @@ export class AddEditRetailerComponent implements OnInit {
         this.spinner.hide();
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         Swal.fire(err.message);
         this.spinner.hide();
       },
@@ -81,20 +84,41 @@ export class AddEditRetailerComponent implements OnInit {
     this.retailerForm.controls['MerchantCity'].setValue(
       this.retailerForm.controls['CityId'].value
     );
-    console.log(this.retailerForm.value);
-    if (this.retailerForm.valid) {
-      this.api.addMerchant(this.retailerForm.value).subscribe({
-        next: (result) => {
-          this.spinner.hide();
-          this.route.navigate(['/retailer']);
-        },
-        error: (err) => {
-          console.log(err);
-          Swal.fire(err.message);
-          this.spinner.hide();
-        },
-      });
-    }
+    //console.log(this.retailerForm.value);
+    if (this.id) {
+      if (this.retailerForm.valid) {
+        this.api.updateMerchant(this.id,this.retailerForm.value).subscribe({
+          next: (result:any) => {
+            this.spinner.hide();
+            this.route.navigate(['/retailer']);
+            Swal.fire(result.message);
+
+          },
+          error: (err) => {
+            //console.log(err);
+            Swal.fire(err.message);
+            this.spinner.hide();
+          },
+        });
+      }
+    }else{
+
+      if (this.retailerForm.valid) {
+        this.api.addMerchant(this.retailerForm.value).subscribe({
+          next: (result:any) => {
+            this.spinner.hide();
+            this.route.navigate(['/retailer']);
+            Swal.fire(result.message);
+
+          },
+          error: (err) => {
+            //console.log(err);
+            Swal.fire(err.message);
+            this.spinner.hide();
+          },
+        });
+      }
+      }
   }
   resetData() {
     this.retailerForm.reset();

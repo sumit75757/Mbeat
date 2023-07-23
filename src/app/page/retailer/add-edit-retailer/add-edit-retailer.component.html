@@ -9,7 +9,7 @@
       class="rounded-xl shadow-xl p-1.5 dark:bg-gray-900"
       style="margin: 0 auto; "
       >
-      <h2 class="text-lg mb-3 font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
+      <h2 class="text-lg mb-3 font-semibold text-gray-700 capitalize dark:text-white">Merchant</h2>
         <form
           [formGroup]="retailerForm"
           (ngSubmit)="formSubmit()"
@@ -23,6 +23,7 @@
             class="flex mt-1 sm:pt-0 sm:m-0"
             style="flex-wrap: wrap; gap: 20px"
           >
+          
             <div class="formInput" style="flex-grow: 1">
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="name">Full Name</label>
               <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -136,7 +137,7 @@
           </div>
           <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="city">City</label>
-            <ng-select formControlName="CityId" [items]="citys" bindLabel="CityName" bindValue="CityId">
+            <ng-select formControlName="CityId" [items]="citys" bindLabel="CityArea" bindValue="CityId">
             </ng-select>
             <!-- <span
               class="error"
@@ -185,6 +186,7 @@
               Your gst number is required.
             </span> -->
           </div>
+          
           <div class="pt-3 flex justify-end">
             <button
               type="submit"

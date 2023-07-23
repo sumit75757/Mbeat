@@ -1,61 +1,16 @@
 <div class="h-full overflow-auto">
   <div class="mt-1 sm:p-0">
-    <div
-      class="mb-2 dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
-    >
+    <div class="mb-2 dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
       <a routerLink="/city">
         <i class="fa-solid fa-arrow-left w-5 flex h-5 sm:w-6 sm:h-6"></i>
       </a>
     </div>
-    <div
-      class="rounded-xl shadow-xl p-1.5 dark:bg-gray-900"
-      style="margin: 0 auto"
-    >
-      <h2
-        class="text-lg mb-3 font-semibold text-gray-700 capitalize dark:text-white"
-      >
-        City
-      </h2>
+    <div class="rounded-xl shadow-xl p-1.5 dark:bg-gray-900" style="margin: 0 auto">
+      <h2 class="text-lg mb-3 font-semibold text-gray-700 capitalize dark:text-white">City</h2>
       <form [formGroup]="cityForm" (ngSubmit)="formSubmit()" class="" validate>
-        <!-- <div class="" style="width: 150px; ">
-            <img src="" alt="Header image" />
-          </div> -->
-        <div
-          class="flex mt-1 sm:pt-0 sm:m-0"
-          style="flex-wrap: wrap; gap: 20px"
-        >
+        <div class="flex mt-1 sm:pt-0 sm:m-0" style="flex-wrap: wrap; gap: 20px">
           <div class="formInput" style="flex-grow: 1">
-            <label
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              for="name"
-              >District</label
-            >
-            <input
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              type="text"
-              id="name"
-              formControlName="District"
-              placeholder="Enter District"
-              required
-            />
-            <!-- <span
-                class="error"
-                *ngIf="
-                  (f.controls.['name']?.errors?.required &&
-                    (f.controls.['name'].dirty || f.controls.['name'].touched)) ||
-                  isAllValid
-                "
-              >
-                Your user name is required.
-              </span> -->
-          </div>
-
-          <div class="formInput" style="flex-grow: 1">
-            <label
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              for="mobile"
-              >State</label
-            >
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="mobile">State</label>
             <input
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               type="text"
@@ -63,54 +18,55 @@
               placeholder="Enter State"
               required
             />
-            <!-- <span
-                class="error"
-                *ngIf="
-                  (f.controls.['mobile'].errors?.required &&
-                    (f.controls.['mobile'].dirty || f.controls.['mobile'].touched)) ||
-                  isAllValid
-                "
-              >
-                Your mobile number is required.
-              </span> -->
           </div>
-        </div>
-
-        <div
-          class="flex sm:pt-0 sm:m-0"
-          style="flex-wrap: wrap; gap: 20px; padding-top: 10px"
-        >
           <div class="formInput" style="flex-grow: 1">
-            <label
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              for="address"
-              >CityName</label
-            >
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="name">City Name</label>
             <input
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               type="text"
+              id="name"
               formControlName="CityName"
-              placeholder="EnterCityName"
+              placeholder="Enter City Name"
               required
             />
-
-            <!-- <span
-                class="error"
-                *ngIf="
-                  (f.controls.['address'].errors?.required &&
-                    (f.controls.['address'].dirty ||
-                      f.controls.['address'].touched)) ||
-                  isAllValid
-                "
-              >
-                Your address is required.
-              </span> -->
           </div>
         </div>
-
+        <div *ngIf="id" class="formInput" >
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="name">City Gam</label>
+            <input
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="text"
+              id="name"
+              formControlName="CityArea"
+              placeholder="Enter City Gam"
+              required
+            />
+        </div>
+        <div *ngIf="!id" formArrayName="CityArea" class="mt-3">
+          <div class="flex" *ngFor="let area of cityAreas.controls; let i = index">
+            <input
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Area"
+              [formControlName]="i"
+              type="text"
+            />
+            <button class="m-2" (click)="removeField(i)">
+              <i class="fa fa-trash text-red-500"></i>
+            </button>
+          </div>
+        </div>
+        
+        <button
+        *ngIf="!id"
+          type="button"
+          class="bg-gray-50 border mt-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          (click)="addCreds()"
+        >
+          Add Area
+        </button>
         <div class="pt-3 flex justify-end">
           <button
-            type="submit"
+            type="button"
             class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
             (click)="resetData()"
           >
@@ -122,8 +78,3 @@
           >
             Submit
           </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>

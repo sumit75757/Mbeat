@@ -9,7 +9,7 @@
       class="rounded-xl shadow-xl p-1.5 dark:bg-gray-900"
       style="margin: 0 auto; "
       >
-      <h2 class="text-lg mb-3 font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
+      <h2 class="text-lg mb-3 font-semibold text-gray-700 capitalize dark:text-white">Product</h2>
         <form
           [formGroup]="sellerForm"
           (ngSubmit)="formSubmit()"
@@ -44,26 +44,6 @@
               </span> -->
             </div>
   
-            <div class="formInput" style="flex-grow: 1">
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="mobile">Product Catogary</label>
-              <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                type="text"
-                id="mobile"
-                formControlName="ProductCategory"
-                placeholder="Enter your mobile number"
-                required
-              />
-              <!-- <span
-                class="error"
-                *ngIf="
-                  (f.controls.['mobile'].errors?.required &&
-                    (f.controls.['mobile'].dirty || f.controls.['mobile'].touched)) ||
-                  isAllValid
-                "
-              >
-                Your mobile number is required.
-              </span> -->
-            </div>
           </div>
   
           <!-- <div

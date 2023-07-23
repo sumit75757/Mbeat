@@ -24,7 +24,7 @@ export class RetailerComponent implements OnInit {
         this.spinner.hide();
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         Swal.fire(err.message)
         this.spinner.hide();
       },
@@ -47,7 +47,7 @@ export class RetailerComponent implements OnInit {
                   this.getRetailer()
                 },
                 error: (err) => {
-                  console.log(err);
+                  //console.log(err);
                   Swal.fire(err.message)
                 },
               })

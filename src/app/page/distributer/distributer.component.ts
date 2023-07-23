@@ -26,7 +26,7 @@ export class DistributerComponent implements OnInit {
         this.spinner.hide();
       },
       error: (err) => {
-        console.log(err);
+        //console.log(err);
         Swal.fire(err.message)
         this.spinner.hide();
       },
@@ -50,7 +50,7 @@ export class DistributerComponent implements OnInit {
                 this.getDistributor()
               },
               error: (err) => {
-                console.log(err);
+                //console.log(err);
                 Swal.fire(err.message)
               },
             })

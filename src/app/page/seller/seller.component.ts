@@ -32,7 +32,7 @@ export class SellerComponent implements OnInit {
       },
     });
   }
-  delete(id: any) {
+  deletee(id: any) {
     Swal.fire({
       title: 'Are you sure want to remove?',
       text: 'You will not be able to recover this file!',
@@ -48,34 +48,77 @@ export class SellerComponent implements OnInit {
             this.getProduct();
           },
           error: (err) => {
-            console.log(err);
+            //console.log(err);
             Swal.fire(err.message);
           },
         });
       }
     });
   }
-  id :any
+  id: any;
+  catID:any
   catogroyForm: FormGroup = this.fb.group({
     ProductId: ['', [Validators.required]],
     ProductCategory: ['', [Validators.required]],
   });
   resetData() {
+    this.id =''
+    this.catID = ''
     this.catogroyForm.reset();
   }
   formSubmit() {
-    this.catogroyForm.controls['ProductId'].setValue(this.id)
+    this.catogroyForm.controls['ProductId'].setValue(this.id);
     if (this.catogroyForm.valid) {
       this.api.addcaogory(this.catogroyForm.value).subscribe({
         next: (res: any) => {
           Swal.fire(res.message);
-          this.id = ''
+          this.id = '';
+          this.getProduct();
         },
         error: (err) => {
-          console.log(err);
+          //console.log(err);
           Swal.fire(err.message);
         },
       });
     }
+  }
+  updatecat(prodId: any, cat: any) {
+    this.resetData()
+    this.id = prodId;
+    this.catID = cat.ProductCategoryId
+    this.catogroyForm.setValue({
+      ProductId: prodId,
+      ProductCategory: cat.ProductCategory,
+    });
+  }
+  Update(){
+    if (this.catogroyForm.valid) {
+      this.api.updatecaogory(this.catID,this.catogroyForm.value).subscribe({
+        next: (res: any) => {
+          Swal.fire(res.message);
+          this.id = '';
+          this.getProduct();
+          this.resetData()
+        },
+        error: (err) => {
+          //console.log(err);
+          Swal.fire(err.message);
+        },
+      });
+    }
+  }
+  removecat(){
+    this.api.removecaogory(this.catID).subscribe({
+      next: (res: any) => {
+        Swal.fire(res.message);
+        this.id = '';
+        this.getProduct();
+        this.resetData()
+      },
+      error: (err) => {
+        //console.log(err);
+        Swal.fire(err.message);
+      },
+    });
   }
 }
