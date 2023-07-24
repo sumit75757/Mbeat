@@ -83,10 +83,10 @@
                   </button>
                 </td>
                 <td
-                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
+                  class="px-4 py-4 text-sm lg:flex text-gray-500 dark:text-gray-300 whitespace-nowrap"
                 >
-                  <div *ngFor="let cat of item.product_category">
-                    <div (click)="updatecat(item.ProductId, cat)">
+                  <div *ngFor="let cat of item.product_category" class="[word-wrap: break-word] my-[5px] mr-4 flex h-[32px] cursor-pointer items-center justify-between rounded-[16px] bg-[#eceff1] px-[12px] py-0 text-[13px] font-normal normal-case leading-loose text-[#4f4f4f] shadow-none transition-[opacity] duration-300 ease-linear hover:!shadow-none active:bg-[#cacfd1] dark:bg-neutral-600 dark:text-neutral-200">
+                    <div (click)="updatecat(item.ProductId, cat)" >
                       {{ cat.ProductCategory }}
                     </div>
                   </div>
@@ -224,7 +224,7 @@
             *ngIf="catID"
             (click)="removecat()"
             type="button"
-            class="mt-3 mx-2 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+            class="mt-3 sm:mx-0  inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
           >
             Delete
           </button>

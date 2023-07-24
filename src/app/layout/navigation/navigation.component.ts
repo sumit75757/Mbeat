@@ -35,7 +35,7 @@ export class NavigationComponent implements OnInit {
       route: '/order',
     },
     {
-      name: 'Distributer',
+      name: 'Distributor',
       icon: 'fa-solid fa-building-circle-arrow-right',
       route: '/distributer',
     },
@@ -90,7 +90,7 @@ export class NavigationComponent implements OnInit {
           route: '/order',
         },
         {
-          name: 'Distributer',
+          name: 'Distributor',
           icon: 'fa-solid fa-building-circle-arrow-right',
           route: '/distributer',
         },
@@ -164,8 +164,8 @@ export class NavigationComponent implements OnInit {
   }
 
   logout() {
-    this.route.navigate(['/auth']);
-    localStorage.removeItem('user');
+    localStorage.removeItem('userdata');
     localStorage.removeItem('token');
+    this.route.navigate(['/auth']);
   }
 }

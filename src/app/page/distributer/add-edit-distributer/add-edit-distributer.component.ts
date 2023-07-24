@@ -80,8 +80,7 @@ export class AddEditDistributerComponent implements OnInit {
         });
       }
     } else {
-      //console.log(this.distributorForm.value);
-      
+      console.log(this.distributorForm.value);
       if (this.distributorForm.valid) {
         this.api
           .updateDistributor(this.id, this.distributorForm.value)
@@ -97,6 +96,7 @@ export class AddEditDistributerComponent implements OnInit {
             },
           });
       }
+      
     }
   }
 }

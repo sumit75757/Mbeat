@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/service/auth/api.service';
+import Swal from 'sweetalert2';
 import swal from "sweetalert2";
 @Component({
   selector: 'app-auth',
@@ -15,9 +16,14 @@ import swal from "sweetalert2";
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
+  forgotpassword=false
   toggleForm: boolean = false;
   authForm: FormGroup = this.fb.group({
     Role:new FormControl('Salesmen', Validators.required),
+    Email: new FormControl('', Validators.email),
+    Password: new FormControl('', Validators.required),
+  });
+  passwordForgotForm: FormGroup = this.fb.group({
     Email: new FormControl('', Validators.email),
     Password: new FormControl('', Validators.required),
   });
@@ -92,6 +98,19 @@ export class AuthComponent implements OnInit {
         });
         //console.log('sinup', this.authForm.value);
       }
+    }
+  }
+  forgotpass(){
+    if(this.passwordForgotForm.valid){
+      this.auth.forgot(this.passwordForgotForm.value).subscribe({
+        next:(value:any)=> {
+          Swal.fire(value.data.message)
+          this.forgotpassword=false
+        },
+        error:(err)=> {
+          Swal.fire(err.data.message)
+        },
+      })
     }
   }
 }
