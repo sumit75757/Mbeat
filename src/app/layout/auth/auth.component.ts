@@ -102,13 +102,17 @@ export class AuthComponent implements OnInit {
   }
   forgotpass(){
     if(this.passwordForgotForm.valid){
+    this.spiner.show();
       this.auth.forgot(this.passwordForgotForm.value).subscribe({
         next:(value:any)=> {
-          Swal.fire(value.data.message)
+          Swal.fire(value.message)
           this.forgotpassword=false
+    this.spiner.hide();
         },
         error:(err)=> {
-          Swal.fire(err.data.message)
+          Swal.fire(err.message)
+    this.spiner.hide();
+          
         },
       })
     }
