@@ -63,9 +63,7 @@
                     Teams
                   </th> -->
 
-                <th scope="col" class="relative py-3.5 px-4">
-                  <span class="sr-only">Edit</span>
-                </th>
+               
               </tr>
             </thead>
             <tbody
@@ -88,8 +86,8 @@
                   {{ city.State }}
                 </td>
 
-                <td class="px-4 py-4 text-sm whitespace-nowrap">
-                  <div class="flex items-center gap-x-6">
+                <td class="pl-4 ml-4 py-4 text-sm whitespace-nowrap">
+                  <div class="flex items-center justify-center gap-x-6">
                     <button
                       (click)="deleteCity(city.CityId)"
                       class="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"

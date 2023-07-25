@@ -66,9 +66,11 @@ export class FormPopupComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.getCity();
     this.getProduct();
+      
     await this.api.getbyorder(this.id).subscribe((res: any) => {
       this.CityId = res.data.merchant_details.MerchantCity;
-      this.destributer = res.data.merchant_details.MerchantCity;
+      this.destributer = res.data.merchant_details.distributor_details.DistributorId;
+      console.log(this.CityId,"asdfasdfas",this.destributer);
       //console.log(this.CityId);
       this.getDistributor({ CityId: res.data.merchant_details.MerchantCity });
       this.getcatogory(res.data.product_cat_details);
@@ -110,6 +112,7 @@ export class FormPopupComponent implements OnInit {
       //   CityId:res.data.merchant_details.MerchantCity
       // });
     });
+
   }
   distibuter: any;
   citys: any;

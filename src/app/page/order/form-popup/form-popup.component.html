@@ -47,7 +47,6 @@
                     validate
                   >
                     <div class="w-[60vw]">
-                      
                       <div class="formInput" style="flex-grow: 1">
                         <label
                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -55,11 +54,12 @@
                           >City</label
                         >
                         <ng-select
+                        [items]="citys"
                           [(ngModel)]="CityId"
-                          [items]="citys"
-                          (change)="getDistributor($event)"
+                          [ngModelOptions]="{ standalone: true }"
                           bindLabel="CityArea"
-                          bindValue="cityId"
+                          bindValue="CityId"
+                          (change)="getDistributor($event)"
                         >
                         </ng-select>
                         <div class="formInput" style="flex-grow: 1">
@@ -69,12 +69,12 @@
                             >Distributor</label
                           >
                           <ng-select
-                          [(ngModel)]="destributer"
+                            [(ngModel)]="destributer"
+                            [ngModelOptions]="{ standalone: true }"
                             [items]="distibuter"
                             bindLabel="DistributorName"
                             bindValue="DistributorId"
                             (change)="getmerchant($event)"
-
                           >
                           </ng-select>
                         </div>
@@ -133,20 +133,19 @@
                           >
                           </ng-select>
                         </div>
-                        
                       </div>
                       <div class="formInput" style="flex-grow: 1">
                         <label
                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                           for="weight"
-                          >Quantity</label
+                          >Weight</label
                         >
                         <input
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           type="number"
                           id="Weight"
                           formControlName="ProductQuantity"
-                          placeholder="Enter Quantity"
+                          placeholder="Enter Weight"
                           required
                         />
                         <!-- <span
