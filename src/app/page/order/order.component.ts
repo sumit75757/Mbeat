@@ -18,16 +18,18 @@ export class OrderComponent implements OnInit {
   ) {}
   id: any;
   order: any;
+  userdata:any
   ngOnInit(): void {
-    let userdata = JSON.parse(localStorage.getItem('userdata')+'')
-    if(userdata.Role == "Salesmen"){
-      this.id = userdata.UserId
-    }
-    this.getorder();
+    this.api.Role.subscribe((user:any)=>{
+      if(user.Role == "Salesmen"){
+        this.id = this.userdata.UserId
+        this.getorder(this.id);
+      }
+    })
   }
-  getorder() {
-    if (this.id) {
-      this.api.getorder(this.id).subscribe({
+  getorder(id?:any) {
+    if (id) {
+      this.api.getorder(id).subscribe({
         next: (res: any) => {
           this.order = res.data;
           this.spinner.hide();
