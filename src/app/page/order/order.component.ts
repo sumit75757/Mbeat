@@ -19,13 +19,20 @@ export class OrderComponent implements OnInit {
   id: any;
   order: any;
   ngOnInit(): void {
-    let userdata = JSON.parse(localStorage.getItem('userdata')+'')
-    if(userdata.Role == "Salesmen"){
-      this.id = userdata.UserId
-    }
-    this.getorder();
+    this.api.Role.subscribe((res: any) => {
+      console.log(res);
+      let userdata = res;
+      if (userdata.Role == 'Salesmen'  ) {
+        this.id = userdata.UserId;
+        console.log(this.id);
+        this.getorder(this.id);
+      }
+      if (userdata.Role == 'Admin') {
+        this.getorder();
+      }
+    });
   }
-  getorder() {
+  getorder(id?: any) {
     if (this.id) {
       this.api.getorder(this.id).subscribe({
         next: (res: any) => {
@@ -66,7 +73,7 @@ export class OrderComponent implements OnInit {
           next: (res: any) => {
             this.order = res.data;
             this.spinner.hide();
-            this.getorder()
+            this.getorder();
           },
           error: (err) => {
             //console.log(err);
@@ -76,7 +83,5 @@ export class OrderComponent implements OnInit {
         });
       }
     });
-    
   }
-  
 }

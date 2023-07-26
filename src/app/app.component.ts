@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     this.api.me({ Name: this.user.Name, Email: this.user.Email }).subscribe({
       next: (res: any) => {
         localStorage.setItem('userdata', JSON.stringify(res.data));
+        this.api.Role.next(res.data)
         if(res.data.Role == 'Salesmen' && this.token){
           this.route.navigate(['/order'])
         }

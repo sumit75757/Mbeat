@@ -11,16 +11,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashbord.component.scss'],
 })
 export class DashbordComponent implements OnInit {
-  constructor(private api: ApiService,private route:Router, private spinner: NgxSpinnerService) {}
+  constructor(private api: ApiService,private route:Router, private spinner: NgxSpinnerService) {
+    this.api.Role.subscribe((res:any)=>{
+      debugger
+      console.log(res);
+       if (res.Role === 'Salesmen') {
+         this.route.navigate(['/order'])
+       }
+    })
+  }
   list: number = 10;
   users: any;
   ngOnInit(): void {
     this.spinner.show();
     this.getdata()
-    let data:any = localStorage.getItem('userdata')
-    if (data.Role == 'Salesmen') {
-      this.route.navigate(['/order'])
-    }
+     
   }
   role:any
   getdata() {

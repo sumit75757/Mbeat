@@ -9,17 +9,17 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/service/auth/api.service';
 import Swal from 'sweetalert2';
-import swal from "sweetalert2";
+import swal from 'sweetalert2';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-  forgotpassword=false
+  forgotpassword = false;
   toggleForm: boolean = false;
   authForm: FormGroup = this.fb.group({
-    Role:new FormControl('Salesmen', Validators.required),
+    Role: new FormControl('Salesmen', Validators.required),
     Email: new FormControl('', Validators.email),
     Password: new FormControl('', Validators.required),
   });
@@ -32,7 +32,7 @@ export class AuthComponent implements OnInit {
     private fb: FormBuilder,
     private auth: ApiService,
     private spiner: NgxSpinnerService,
-    private Route : Router
+    private Route: Router
   ) {}
 
   toggle() {
@@ -55,62 +55,62 @@ export class AuthComponent implements OnInit {
     }
   }
   submit() {
-    //console.log(this.authForm.value,this.toggleForm);
-    if (this.authForm.valid) {
-      if (!this.toggleForm) {
+    console.log("call");
+    
+    if (!this.toggleForm) {
+      if (this.authForm.valid) {
         this.spiner.show();
         this.auth.singin(this.authForm.value).subscribe({
           next: (res: any) => {
             //console.log(res.data);
-            swal.fire(res.message)
-            localStorage.setItem('userdata',JSON.stringify(res.data.findUser));
+            swal.fire(res.message);
+            localStorage.setItem('userdata', JSON.stringify(res.data.findUser));
             localStorage.setItem('token', JSON.stringify(res.data.token));
-            this.Route.navigate(['/'])
+            this.Route.navigate(['/']);
             setTimeout(() => {
               this.spiner.hide();
             }, 600);
           },
           error: (err) => {
             this.spiner.hide();
-            swal.fire(err.message)
-
+            swal.fire(err.message);
           },
         });
         //console.log('sinup', this.authForm.value);
         //console.log('login', this.authForm.value);
-      } else {
-        this.spiner.show();
-        this.auth.singup(this.authForm.value).subscribe({
-          next: (res: any) => {
-            //console.log(res.data);
-            swal.fire(res.message)
-            localStorage.setItem('userdata',JSON.stringify(this.authForm.value));
-            localStorage.setItem('token', JSON.stringify(res.data.token));
-            this.Route.navigate(['/'])
-            setTimeout(() => {
-              this.spiner.hide();
-            }, 600);
-          },
-          error: (err) => {
-            swal.fire(err.data)
-            this.spiner.hide();
-          },
-        });
-        //console.log('sinup', this.authForm.value);
       }
+      //console.log('sinup', this.authForm.value);
+    } else {
+      this.spiner.show();
+      this.auth.singup(this.authForm.value).subscribe({
+        next: (res: any) => {
+          //console.log(res.data);
+          swal.fire(res.message);
+          localStorage.setItem('userdata', JSON.stringify(this.authForm.value));
+          localStorage.setItem('token', JSON.stringify(res.data.token));
+          this.Route.navigate(['/']);
+          setTimeout(() => {
+            this.spiner.hide();
+          }, 600);
+        },
+        error: (err) => {
+          swal.fire(err.data);
+          this.spiner.hide();
+        },
+      });
     }
   }
-  forgotpass(){
-    if(this.passwordForgotForm.valid){
+  forgotpass() {
+    if (this.passwordForgotForm.valid) {
       this.auth.forgot(this.passwordForgotForm.value).subscribe({
-        next:(value:any)=> {
-          Swal.fire(value.data.message)
-          this.forgotpassword=false
+        next: (value: any) => {
+          Swal.fire(value.data.message);
+          this.forgotpassword = false;
         },
-        error:(err)=> {
-          Swal.fire(err.data.message)
+        error: (err) => {
+          Swal.fire(err.data.message);
         },
-      })
+      });
     }
   }
 }

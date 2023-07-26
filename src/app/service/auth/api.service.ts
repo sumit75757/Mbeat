@@ -7,10 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 export class ApiService {
   // bashUrl: string = 'http://localhost:8000/api/';
   bashUrl:string = "https://mbeatapi.onrender.com/api/"
-  Role: BehaviorSubject<any> | any;
+  Role: BehaviorSubject<any> = new BehaviorSubject({});
 
   constructor(private http: HttpClient) {
-    this.Role = new BehaviorSubject('');
   }
   headers:any
   lodeheader(){
@@ -241,7 +240,7 @@ export class ApiService {
       });
     } else {
       this.lodeheader()
-      return this.http.get(this.bashUrl + 'order/getOrders/?SalesManId=' + id, {
+      return this.http.get(this.bashUrl + 'order/getOrders?SalesManId=' + id, {
         headers: this.headers,
       });
     }
