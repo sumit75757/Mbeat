@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import { ApiService } from 'src/app/service/auth/api.service';
 
 @Component({
   selector: 'app-navigation',
@@ -14,43 +15,24 @@ export class NavigationComponent implements OnInit {
   isDarkEnable: boolean = false;
   token: any = localStorage.getItem('token');
   routeConfig = [
-    {
-      name: 'Dashboard',
-      icon: 'fa-solid fa-house',
-      route: '/',
-    },
-    {
-      name: 'City',
-      icon: 'fa-solid fa-city',
-      route: '/city',
-    },
-    {
-      name: 'Product',
-      icon: 'fa-solid fa-users',
-      route: '/product',
-    },
-    {
-      name: 'Order',
-      icon: 'fa-solid fa-cart-shopping',
-      route: '/order',
-    },
-    {
-      name: 'Distributor',
-      icon: 'fa-solid fa-building-circle-arrow-right',
-      route: '/distributer',
-    },
-    {
-      name: 'Merchant',
-      icon: 'fa-solid fa-store',
-      route: '/retailer',
-    },
+      {
+          name: 'Order',
+          icon: 'fa-solid fa-cart-shopping',
+          route: '/order',
+        },
+        {
+          name: 'Merchant',
+          icon: 'fa-solid fa-store',
+          route: '/retailer',
+        },
   ];
 
   constructor(
     public auth: AuthService,
     private http: HttpClient,
     private meta: Meta,
-    private route: Router
+    private route: Router,
+    private api: ApiService
   ) {
     this.isDarkEnable = JSON.parse(localStorage.getItem('theme') + '');
     this.user = JSON.parse(localStorage.getItem('userdata') + '');
