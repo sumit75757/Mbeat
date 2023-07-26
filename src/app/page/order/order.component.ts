@@ -22,8 +22,10 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.api.Role.subscribe((user:any)=>{
       if(user.Role == "Salesmen"){
-        this.id = this.userdata.UserId
-        this.getorder(this.id);
+        this.getorder(user.UserId);
+      }
+      else{
+        this.getorder(user.UserId);
       }
     })
   }
