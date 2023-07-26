@@ -100,15 +100,19 @@ export class AuthComponent implements OnInit {
       });
     }
   }
-  forgotpass() {
-    if (this.passwordForgotForm.valid) {
+  forgotpass(){
+    if(this.passwordForgotForm.valid){
+    this.spiner.show();
       this.auth.forgot(this.passwordForgotForm.value).subscribe({
-        next: (value: any) => {
-          Swal.fire(value.data.message);
-          this.forgotpassword = false;
+        next:(value:any)=> {
+          Swal.fire(value.message)
+          this.forgotpassword=false
+    this.spiner.hide();
         },
-        error: (err) => {
-          Swal.fire(err.data.message);
+        error:(err)=> {
+          Swal.fire(err.message)
+    this.spiner.hide();
+          
         },
       });
     }

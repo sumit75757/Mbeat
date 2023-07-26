@@ -18,6 +18,7 @@ export class OrderComponent implements OnInit {
   ) {}
   id: any;
   order: any;
+  userdata:any
   ngOnInit(): void {
     this.api.Role.subscribe((res: any) => {
       console.log(res);
@@ -33,8 +34,8 @@ export class OrderComponent implements OnInit {
     });
   }
   getorder(id?: any) {
-    if (this.id) {
-      this.api.getorder(this.id).subscribe({
+    if (id) {
+      this.api.getorder(id).subscribe({
         next: (res: any) => {
           this.order = res.data;
           this.spinner.hide();
