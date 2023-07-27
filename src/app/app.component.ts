@@ -48,11 +48,11 @@ export class AppComponent implements OnInit {
     
 
     
-    if (environment.PWA) {
-      let link: HTMLLinkElement = this.doc.createElement('link');
-      link.setAttribute('rel', 'manifest');
-      link.setAttribute('href', 'manifest.webmanifest');
-      this.doc.head.appendChild(link);
-    }
+    // if (environment.PWA) {
+    //   let link: HTMLLinkElement = this.doc.createElement('link');
+    //   link.setAttribute('rel', 'manifest');
+    //   link.setAttribute('href', 'manifest.webmanifest');
+    //   this.doc.head.appendChild(link);
+    // }
   }
 }

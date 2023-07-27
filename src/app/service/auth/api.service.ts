@@ -240,7 +240,7 @@ export class ApiService {
       });
     } else {
       this.lodeheader()
-      return this.http.get(this.bashUrl + 'order/getOrders?SalesManId=' + id, {
+      return this.http.get(this.bashUrl + 'order/getSalesmenOrders?SalesManId=' + id, {
         headers: this.headers,
       });
     }

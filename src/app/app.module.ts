@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormPopupComponent } from './page/order/form-popup/form-popup.component';
 import { SharedModule } from './shared/shared/shared.module';
 import { InterceptorInterceptor } from './service/interceptor.interceptor';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 let pwa :any =[]
 
 @NgModule({
@@ -44,8 +44,9 @@ let pwa :any =[]
     provide:HTTP_INTERCEPTORS,
     useClass:InterceptorInterceptor,
     multi:true
-  }],
+  },{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {
   constructor(){

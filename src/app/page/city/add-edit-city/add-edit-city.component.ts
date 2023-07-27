@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/service/auth/api.service';
@@ -24,7 +30,7 @@ export class AddEditCityComponent implements OnInit {
         this.cityForm = this.fb.group({
           State: ['', [Validators.required]],
           CityName: ['', [Validators.required]],
-          CityArea: ['', [Validators.required]]
+          CityArea: ['', [Validators.required]],
         });
       } else {
         this.cityForm = this.fb.group({
@@ -42,14 +48,10 @@ export class AddEditCityComponent implements OnInit {
     });
   }
 
-  cityForm!: FormGroup 
-  initForm() {
-    
-  }
+  cityForm!: FormGroup;
+  initForm() {}
   id: any;
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
   get cityAreas() {
     return this.cityForm.get('CityArea') as FormArray;
   }
@@ -70,11 +72,13 @@ export class AddEditCityComponent implements OnInit {
     //console.log(this.cityForm.value);
     if (!this.id) {
       if (this.cityForm.valid) {
+        this.spinner.show();
         this.api.addCity(this.cityForm.value).subscribe({
           next: (res: any) => {
             swal.fire(res.message);
             this.spinner.hide();
             this.route.navigate(['/city']);
+            this.spinner.hide();
           },
           error: (err) => {
             swal.fire(err.message);

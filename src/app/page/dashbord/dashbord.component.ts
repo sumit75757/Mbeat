@@ -12,13 +12,14 @@ import { Router } from '@angular/router';
 })
 export class DashbordComponent implements OnInit {
   constructor(private api: ApiService,private route:Router, private spinner: NgxSpinnerService) {
-    this.api.Role.subscribe((res:any)=>{
-      debugger
-      console.log(res);
-       if (res.Role === 'Salesmen') {
-         this.route.navigate(['/order'])
-       }
-    })
+    setTimeout(() => {
+      this.api.Role.subscribe((res:any)=>{
+        console.log(res);
+        if (res.Role === 'Salesmen') {
+          this.route.navigate(['/order'])
+        }
+      })
+    }, 200);
   }
   list: number = 10;
   users: any;

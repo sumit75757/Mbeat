@@ -50,7 +50,7 @@ export class FormPopupComponent implements OnInit {
         JSON.parse(localStorage.getItem('userdata') + '').Name,
         [Validators.required],
       ],
-      SalesmenId: [
+      SalesManId: [
         JSON.parse(localStorage.getItem('userdata') + '').UserId,
         [Validators.required],
       ],
