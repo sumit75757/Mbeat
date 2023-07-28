@@ -90,7 +90,7 @@ this.auth.Role.next(res.data.findUser)
           swal.fire(res.message);
           localStorage.setItem('userdata', JSON.stringify(this.authForm.value));
           localStorage.setItem('token', JSON.stringify(res.data.token));
-          this.Route.navigate(['/']);
+          this.Route.navigate(['/order']);
           setTimeout(() => {
             this.spiner.hide();
           }, 600);
