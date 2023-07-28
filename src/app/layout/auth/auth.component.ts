@@ -86,7 +86,7 @@ export class AuthComponent implements OnInit {
       this.auth.singup(this.authForm.value).subscribe({
         next: (res: any) => {
           //console.log(res.data);
-
+this.auth.Role.next(res.data.findUser)
           swal.fire(res.message);
           localStorage.setItem('userdata', JSON.stringify(this.authForm.value));
           localStorage.setItem('token', JSON.stringify(res.data.token));
