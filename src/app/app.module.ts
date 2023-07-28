@@ -44,7 +44,7 @@ let pwa :any =[]
     provide:HTTP_INTERCEPTORS,
     useClass:InterceptorInterceptor,
     multi:true
-  },{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  }],
   bootstrap: [AppComponent],
 
 })
