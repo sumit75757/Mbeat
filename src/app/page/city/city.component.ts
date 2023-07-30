@@ -23,7 +23,7 @@ export class CityComponent implements OnInit {
       },
       error: (err) => {
         //console.log(err);
-        Swal.fire(err.message)
+        // Swal.fire(err.message)
         this.spinner.hide();
       },
     });

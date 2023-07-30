@@ -114,12 +114,12 @@
                           <span
                           class="error"
                           *ngIf="
-                            (f.controls.ProductId?.errors?.required &&
-                              (f.controls.ProductId.dirty || f.controls.ProductId.touched)) ||
-                            isAllValid
+                            (f.controls.ProductName?.errors?.required &&
+                              (f.controls.ProductName.dirty || f.controls.ProductName.touched)) ||
+                            isAllValid && f.controls.ProductName.invalid
                           "
                         >
-                          Field is  required.
+                          Product name is required.
                         </span>
                         </div>
                         <div class="formInput" style="flex-grow: 1">
@@ -138,12 +138,12 @@
                           <span
                           class="error"
                           *ngIf="
-                            (f.controls.ProductCategoryId?.errors?.required &&
-                              (f.controls.ProductCategoryId.dirty || f.controls.ProductCategoryId.touched)) ||
-                            isAllValid
+                            (f.controls.ProductCategory?.errors?.required &&
+                              (f.controls.ProductCategory.dirty || f.controls.ProductCategory.touched)) ||
+                            isAllValid && f.controls.ProductCategory.invalid
                           "
                         >
-                          Field is  required.
+                          Product category is required.
                         </span>
                         </div>
                         <div class="formInput" style="flex-grow: 1">
@@ -158,15 +158,15 @@
                           >
                           </ng-select>
                           <span
-                            class="error"
-                            *ngIf="
-                              (f.controls.Packing?.errors?.required &&
-                                (f.controls.Packing.dirty || f.controls.Packing.touched)) ||
-                              isAllValid
-                            "
-                          >
-                            Field is  required.
-                          </span>
+                          class="error"
+                          *ngIf="
+                            (f.controls.Packing?.errors?.required &&
+                              (f.controls.Packing.dirty || f.controls.Packing.touched)) ||
+                            isAllValid && f.controls.Packing.invalid
+                          "
+                        >
+                          Packing is required.
+                        </span>
                         </div>
                       </div>
                       <div class="formInput" style="flex-grow: 1">
@@ -188,10 +188,10 @@
                             *ngIf="
                               (f.controls.ProductQuantity?.errors?.required &&
                                 (f.controls.ProductQuantity.dirty || f.controls.ProductQuantity.touched)) ||
-                              isAllValid
+                              isAllValid && f.controls.ProductQuantity.invalid
                             "
                           >
-                            Field is  required.
+                            Product quantity is required.
                           </span>
                       </div>
                       <div class="formInput" style="flex-grow: 1">
@@ -213,10 +213,10 @@
                             *ngIf="
                               (f.controls.NOS?.errors?.required &&
                                 (f.controls.NOS.dirty || f.controls.NOS.touched)) ||
-                              isAllValid
+                              isAllValid && f.controls.NOS.invalid
                             "
                           >
-                            Field is  required.
+                            Number of pack is required.
                           </span>
                       </div>
                       <div class="formInput" style="flex-grow: 1">
@@ -233,16 +233,6 @@
                           placeholder="Enter scheme"
                           required
                         />
-                        <span
-                            class="error"
-                            *ngIf="
-                              (f.controls.Scheme?.errors?.required &&
-                                (f.controls.Scheme.dirty || f.controls.Scheme.touched)) ||
-                              isAllValid
-                            "
-                          >
-                            Field is  required.
-                          </span>
                       </div>
                     </div>
                   </form>
@@ -271,105 +261,3 @@
     </div>
   </div>
 </div>
-
-<!-- <section class="container px-4 mx-auto">
-  <div class="flex justify-between gap-x-3">
-    <h2 class="text-lg font-medium text-gray-800 dark:text-white">Merchnat</h2>
-  </div>
-
-  <div class="flex flex-col mt-6">
-    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-        <div
-          class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg"
-        >
-          <table
-            class="min-w-full divide-y divide-gray-200 dark:divide-gray-700"
-          >
-            <thead class="bg-gray-50 dark:bg-gray-800">
-              <tr>
-                <th
-                  scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                >
-                  Name
-                </th>
-                <th
-                  scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                >
-                  Email
-                </th>
-
-                <th
-                  scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                >
-                  Phone
-                </th>
-                <th
-                  scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                >
-                  City
-                </th>
-                <th
-                  scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                >
-                  Distributer Name
-                </th>
-                <th
-                  scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                >
-                  GST
-                </th>
-              </tr>
-            </thead>
-            <tbody
-              class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900"
-            >
-              <tr
-                *ngFor="let item of merchant"
-                (click)="navigatie(item.MerchantId)"
-              >
-                <td
-                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
-                >
-                  {{ item.MerchantName }}
-                </td>
-                <td
-                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
-                >
-                  {{ item.MerchantEmail }}
-                </td>
-
-                <td
-                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
-                >
-                  {{ item.MerchantTelNo }}
-                </td>
-                <td
-                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
-                >
-                  {{ item.MerchantCity }}
-                </td>
-                <td
-                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
-                >
-                  {{ item.distributor_details.DistributorName }}
-                </td>
-                <td
-                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
-                >
-                  {{ item.MerchantGSTNumber }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddEditDistributerComponent } from './add-edit-distributer/add-edit-distributer.component';
 import { DistributerComponent } from './distributer.component';
+import { DistCityComponent } from './dist-city/dist-city.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,9 @@ const routes: Routes = [
   },
   {
     path:'edit/:id',component:AddEditDistributerComponent
+  },
+  {
+    path:'editCity/:id',component:DistCityComponent
   }
 ];
 

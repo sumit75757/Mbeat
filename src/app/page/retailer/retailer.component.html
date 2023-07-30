@@ -1,3 +1,68 @@
+
+<div class="h-full w-full" >
+  <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6" (click)="distChange()">
+    <button 
+    type="button"
+    class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+  >
+      Change Distributor?
+    </button>
+  </div>
+  <form class="mt-2" *ngIf="is_open"
+  [formGroup]="dataForm"
+  (ngSubmit)="submit()"
+  >
+    <div class="mb-3 w-auto">
+      <label for="Distributor">Distributor</label>
+      <ng-select
+        [items]="distributorData"
+        bindLabel="DistributorName"
+        bindValue="DistributorId"
+        [(ngModel)]="distributorId"
+        class="w-full"
+        formControlName="distributor"
+        (change)="valueChange()"
+        placeholder="Please select distributor"
+      >
+      </ng-select>
+      <span class="error"  *ngIf="
+      (f.controls.distributor?.errors?.required &&
+        (f.controls.distributor.dirty || f.controls.distributor.touched)) || isAllvalid ">
+      Please select distributor name
+      </span>
+    </div>
+    <div class="mb-3 w-auto">
+      <label for="City">City</label>
+      <ng-select
+      [items]="cityData"
+      bindLabel="DistributorCityName"
+      bindValue="DistributorCityId"
+      [(ngModel)]="cityId"
+      placeholder="Please select city"
+      formControlName="distCity"
+      class="w-full"
+      >
+      
+      </ng-select>
+      <span class="error"  *ngIf="
+      (f.controls.distCity?.errors?.required &&
+        (f.controls.distCity.dirty || f.controls.distCity.touched)) || isAllvalid
+    ">
+      Please select city
+      </span>
+    </div>
+    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+      <button
+        type="submit"
+        class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+      >
+        Submit
+      </button>
+     
+    </div>
+  </form>
+
+</div>
 <section class="container px-4 mx-auto">
   <div class="flex justify-between gap-x-3">
     <h2 class="text-lg font-medium text-gray-800 dark:text-white">Merchant</h2>
@@ -11,9 +76,12 @@
     </a>
   </div>
 
-  <div class="flex flex-col mt-6">
+  <div class="flex flex-col mt-6" *ngIf="is_show">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+      <div class="text-red-500 text-center"  *ngIf="retailer.length == 0">
+        No data found
+      </div>
+      <div class="inline-block min-w-max py-2 align-middle md:px-6 lg:px-8" *ngIf="retailer.length>0">
         <div
           class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg"
         >
@@ -62,7 +130,7 @@
 
                 <th
                   scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                  class="px-4 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400"
                 >
                   Action
                 </th>
@@ -71,7 +139,7 @@
             <tbody
               class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900"
             >
-              <tr *ngFor="let item of retailer">
+              <tr *ngFor="let item of retailer; let i = index">
                 <td
                   class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
                 >
@@ -91,7 +159,7 @@
                 <td
                   class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
                 >
-                  {{ item.distributor_details.city_details.CityArea }}
+                  {{ item.city_details.CityArea }}
                 </td>
                 <td
                   class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
@@ -105,7 +173,9 @@
                 </td>
 
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
+                  
                   <div class="flex items-center gap-x-6">
+
                     <button
                       (click)="deleteMerchant(item.MerchantId)"
                       class="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
@@ -145,12 +215,18 @@
                         />
                       </svg>
                     </a>
+                    <img  (click)="orderForm(item)" src="../../../assets/order-139.svg" class="w-5 h-5">
+
                   </div>
+                 
+
                 </td>
               </tr>
             </tbody>
           </table>
+          
         </div>
+       
       </div>
     </div>
   </div>

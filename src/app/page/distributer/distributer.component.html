@@ -3,14 +3,14 @@
     <h2 class="text-lg font-medium text-gray-800 dark:text-white">
       Distributor
     </h2>
-    <a routerLink="add" class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300  hover:bg-gray-100">
-      
+    <a
+      routerLink="add"
+      class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 transition-colors duration-200 sm:text-base sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"
+    >
       <i class="fa-solid fa-plus w-5 flex items-center h-5 sm:w-6 sm:h-6"></i>
 
       <span>Add Distributor</span>
     </a>
-
-
   </div>
 
   <div class="flex flex-col mt-6">
@@ -43,17 +43,23 @@
                 >
                   Phone
                 </th>
+                <!-- <th
+                  scope="col"
+                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                >
+                  City
+                </th> -->
+                <th
+                scope="col"
+                class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+              >
+                Add City
+              </th>
                 <th
                   scope="col"
                   class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                 >
                   City
-                </th>
-                <th
-                  scope="col"
-                  class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                >
-                  Area
                 </th>
                 <th
                   scope="col"
@@ -70,38 +76,42 @@
                 <td
                   class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
                 >
-                  {{item.DistributorName}}
+                  {{ item.DistributorName }}
                 </td>
                 <td
                   class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
                 >
-                {{item.DistributorEmail}}
-
+                  {{ item.DistributorEmail }}
                 </td>
-               
+
                 <td
                   class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
                 >
-                 {{item.DistributorTelNo}}
-
+                  {{ item.DistributorTelNo }}
                 </td>
                 <td
-                class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
-              >
-               {{item.city_details.CityName}}
+                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
+                >
+                <button (click)="resetData();id = item.DistributorId">
+                  <i class="fa fa-plus"></i>Add City
+                </button>
+                </td>
+                <td
+                
+                  class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap flex flex-col"
+                  *ngFor="let item1 of item.dist_details"
+                >
+                <div *ngIf="!item1.DistributorCityId">N/A</div>
+                <button *ngIf="item1.DistributorCityId" (click)="removecat(item1.DistributorCityId)">
 
+                  {{ item1.DistributorCityName }}
+                </button>
               </td>
-              <td
-                class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap"
-              >
-               {{item.city_details.CityArea}}
 
-              </td>
-            
                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                   <div class="flex items-center gap-x-6">
                     <button
-                    (click)="deleteDistributor(item.DistributorId)"
+                      (click)="deleteDistributor(item.DistributorId)"
                       class="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
                     >
                       <svg
@@ -120,7 +130,8 @@
                       </svg>
                     </button>
 
-                    <a [routerLink]="'edit/'+item.DistributorId"
+                    <a
+                      [routerLink]="'edit/' + item.DistributorId"
                       class="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none"
                     >
                       <svg
@@ -141,14 +152,102 @@
                   </div>
                 </td>
               </tr>
-
-           
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-
-
 </section>
+
+<div
+  *ngIf="id"
+  class="relative z-10"
+  aria-labelledby="modal-title"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+  <div class="fixed inset-0 z-10 overflow-y-auto">
+    <div
+      class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+    >
+      <div
+        class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+      >
+        <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <!-- <div
+              class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
+            >
+              <svg
+                class="h-6 w-6 text-red-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                />
+              </svg>
+            </div> -->
+            <div
+              style="width: 100%"
+              class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left"
+            >
+              <div class="p-6 space-y-6" style="height: 40vh">
+                <div class="h-full overflow-auto">
+                  <form
+                    [formGroup]="cityForm"
+                    (ngSubmit)="Update()"
+                    class="sm:p-3"
+                    validate
+                  >
+                    <div class="w-[60vw]">
+                      <div class="formInput" style="flex-grow: 1">
+                        <label
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          for="city"
+                          >City</label
+                        >
+                          
+                        <ng-select [multiple]="true" formControlName="CityId">
+                          <ng-option
+                            *ngFor="let option of citys"
+                            [value]="option.CityId"
+                            >{{ option.CityArea }}</ng-option
+                          >
+                        </ng-select>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <button
+            (click)="Update()"
+            type="button"
+            class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+          >
+            Submit
+          </button>
+          <button
+            (click)="resetData()"
+            type="button"
+            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

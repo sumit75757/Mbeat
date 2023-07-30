@@ -27,6 +27,8 @@ export class FormPopupComponent implements OnInit {
   isOpen = true;
   orderForm!: FormGroup;
   isAllValid!: boolean;
+  merchantId!:string
+  distributorId!:string
   id: any;
   editdata: any;
   constructor(
@@ -34,7 +36,8 @@ export class FormPopupComponent implements OnInit {
     private api: ApiService,
     private spinner: NgxSpinnerService,
     private Route: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+
   ) {
     this.getCity();
     this.getProduct();
@@ -50,7 +53,7 @@ export class FormPopupComponent implements OnInit {
         JSON.parse(localStorage.getItem('userdata') + '').Name,
         [Validators.required],
       ],
-      SalesManId: [
+      SalesmenId: [
         JSON.parse(localStorage.getItem('userdata') + '').UserId,
         [Validators.required],
       ],
@@ -58,61 +61,90 @@ export class FormPopupComponent implements OnInit {
       Packing: ['', [Validators.required]],
       NOS: ['', [Validators.required]],
       Scheme: [''],
+      // CityId:['',[Validators.required]],
+      DistributorId:['',[Validators.required]],
     });
   }
   CityId: any;
   destributer: any;
   tableData: any;
   async ngOnInit(): Promise<void> {
-    this.getCity();
-    this.getProduct();
+    // if(this.data){
+    //   this.CityId = this.data.CityId
+    //   this.merchantId  = this.data.MerchantId
+    //   this.destributer = this.data.distributor_details.DistributorName
       
-    await this.api.getbyorder(this.id).subscribe((res: any) => {
-      this.CityId = res.data.merchant_details.MerchantCity;
-      this.destributer = res.data.merchant_details.distributor_details.DistributorId;
-      console.log(this.CityId,"asdfasdfas",this.destributer);
-      //console.log(this.CityId);
-      this.getDistributor({ CityId: res.data.merchant_details.MerchantCity });
-      this.getcatogory(res.data.product_cat_details);
-      this.getmerchant(res.data.merchant_details.distributor_details);
-      this.orderForm.controls['OrderDate'].setValue(res.data.OrderDate);
-      this.orderForm.controls['ProductId'].setValue(
-        res.data.product_cat_details.ProductId
-      );
-      this.orderForm.controls['ProductCategoryId'].setValue(
-        res.data.product_cat_details.ProductCategoryId
-      );
-      this.orderForm.controls['ProductQuantity'].setValue(
-        res.data.ProductQuantity
-      );
-      this.orderForm.controls['SalesMen'].setValue(
-        res.data.salesmen_details?.SalesMen
-      );
-      this.orderForm.controls['SalesmenId'].setValue(
-        res.data?.salesmen_details?.SalesmenId
-      );
-      this.orderForm.controls['MerchantId'].setValue(
-        res.data?.merchant_details?.MerchantId
-      );
-      this.orderForm.controls['Packing'].setValue(res.data.Packing);
-      this.orderForm.controls['NOS'].setValue(res.data.NOS);
-      this.orderForm.controls['Scheme'].setValue(res.data.Scheme);
-      // this.orderForm.controls['CityId'].setValue(res.data.merchant_details.MerchantCity)
-      // this.orderForm.setValue({
-      //   OrderDate:res.data.OrderDate,
-      //   ProductId: res.data.product_cat_details.ProductId,
-      //   ProductCategoryId: res.data.product_cat_details.ProductCategoryId,
-      //   ProductQuantity: res.data.ProductQuantity,
-      //   SalesMen: res.data.salesmen_details?.SalesMen,
-      //   SalesmenId: res.data?.salesmen_details?.SalesmenId,
-      //   MerchantId: res.data?.merchant_details?.MerchantId,
-      //   Packing: res.data?.Packing,
-      //   NOS: res.data?.NOS,
-      //   Scheme: res.data?.Scheme,
-      //   CityId:res.data.merchant_details.MerchantCity
-      // });
-    });
+    //   this.orderForm.controls['MerchantId'].setValue(this.data.MerchantId);
+    //   this.orderForm.controls['DistributorId'].setValue(this.data.DistributorId);
+    //   // console.log(this.orderForm.value,"value");
+      
+    //   // this.orderForm.controls['Weight'].setValue(this.data.CityId);
 
+
+      
+    // }
+    // console.log(this.data,"route");
+    
+    // this.getCity();
+    this.getProduct();
+    if(this.id){
+
+      await this.api.getbyorder(this.id).subscribe((res: any) => {
+        console.log(res,"res");
+        
+        this.CityId = res.data.merchant_details.MerchantCity;
+        this.destributer = res.data.distributor_details.DistributorId;
+        // this.orderForm.controls['CityId'].setValue(res.data.merchant_details.MerchantCity)
+        this.orderForm.controls['DistributorId'].setValue(res.data.distributor_details.DistributorId)
+
+        console.log(this.CityId,"asdfasdfas",this.destributer);
+        //console.log(this.CityId);
+        // this.getDistributor({ CityId: res.data.merchant_details.MerchantCity });
+        this.getcatogory(res.data.product_cat_details);
+        // this.getmerchant(res.data.merchant_details.distributor_details);
+        this.orderForm.controls['OrderDate'].setValue(res.data.OrderDate);
+        this.orderForm.controls['ProductId'].setValue(
+          res.data.product_cat_details.ProductId
+        );
+        this.orderForm.controls['ProductCategoryId'].setValue(
+          res.data.product_cat_details.ProductCategoryId
+        );
+        this.orderForm.controls['ProductQuantity'].setValue(
+          res.data.ProductQuantity
+        );
+        this.orderForm.controls['SalesMen'].setValue(
+          res.data.salesmen_details?.SalesMen
+        );
+        this.orderForm.controls['SalesmenId'].setValue(
+          res.data?.salesmen_details?.SalesmenId
+        );
+        this.orderForm.controls['MerchantId'].setValue(
+          res.data?.merchant_details?.MerchantId
+          );
+          console.log( res.data?.merchant_details?.MerchantId,"merchant ID");
+        this.orderForm.controls['Packing'].setValue(res.data.Packing);
+        this.orderForm.controls['NOS'].setValue(res.data.NOS);
+        this.orderForm.controls['Scheme'].setValue(res.data.Scheme);
+        // this.orderForm.controls['CityId'].setValue(res.data.merchant_details.MerchantCity)
+        // this.orderForm.setValue({
+        //   OrderDate:res.data.OrderDate,
+        //   ProductId: res.data.product_cat_details.ProductId,
+        //   ProductCategoryId: res.data.product_cat_details.ProductCategoryId,
+        //   ProductQuantity: res.data.ProductQuantity,
+        //   SalesMen: res.data.salesmen_details?.SalesMen,
+        //   SalesmenId: res.data?.salesmen_details?.SalesmenId,
+        //   MerchantId: res.data?.merchant_details?.MerchantId,
+        //   Packing: res.data?.Packing,
+        //   NOS: res.data?.NOS,
+        //   Scheme: res.data?.Scheme,
+        //   CityId:res.data.merchant_details.MerchantCity
+        // });
+      });
+    }
+
+  }
+  get f() {
+    return this.orderForm;
   }
   distibuter: any;
   citys: any;
@@ -172,17 +204,25 @@ export class FormPopupComponent implements OnInit {
       this.merchant = res.data;
     });
   }
+  isAllvalid!:boolean
   formSubmit() {
+    if(this.orderForm.invalid){
+      this.isAllvalid = true;
+      return
+    }
     if (!this.id) {
       this.api.addorder(this.orderForm.value).subscribe((res: any) => {
         this.merchant = res.data;
         Swal.fire(res.message);
         this.Route.navigate(['/order']);
+        // this.dialogRef.close()
         // this.isOpen = false;
       },(err:any)=>{
         Swal.fire(err.message);
       });
     } else {
+      console.log(this.orderForm.value);
+      
       this.api
         .updateorder(this.id, this.orderForm.value)
         .subscribe((res: any) => {
@@ -198,7 +238,8 @@ export class FormPopupComponent implements OnInit {
   packing = ['100gm', '250gm', '500gm', '1kg', '5kg'];
   resetData() {
     this.Route.navigate(['/order']);
-    // this.isOpen = false;
+    // this.dialogRef.close()
+      // this.isOpen = false;
     this.orderForm.reset();
   }
   navigatie(id: any) {

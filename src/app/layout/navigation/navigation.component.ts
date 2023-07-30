@@ -36,7 +36,7 @@ export class NavigationComponent implements OnInit {
   ) {
     this.isDarkEnable = JSON.parse(localStorage.getItem('theme') + '');
     this.user = JSON.parse(localStorage.getItem('userdata') + '');
-    if (this.user.Role == 'Salesmen') {
+    if (this.user.Role == 'Salesmen'|| this.user.Role == null) {
       this.routeConfig = [
         {
           name: 'Order',

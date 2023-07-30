@@ -73,8 +73,10 @@ export class AuthComponent implements OnInit {
             }, 600);
           },
           error: (err) => {
+            console.log(err,"err");
+            
             this.spiner.hide();
-            swal.fire(err.message);
+            swal.fire(err.error.message);
           },
         });
         //console.log('sinup', this.authForm.value);
@@ -96,6 +98,8 @@ this.auth.Role.next(res.data.findUser)
           }, 600);
         },
         error: (err) => {
+          console.log(err,"err");
+          
           swal.fire(err.data);
           this.spiner.hide();
         },

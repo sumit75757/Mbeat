@@ -25,7 +25,7 @@
         <!-- <div class="" style="width: 150px; ">
             <img src="" alt="Header image" />
           </div> -->
-          
+
         <div
           class="flex mt-1 sm:pt-0 sm:m-0"
           style="flex-wrap: wrap; gap: 20px"
@@ -41,20 +41,46 @@
               type="text"
               id="name"
               formControlName="DistributorName"
-              placeholder="Enter your user name"
+              placeholder="Enter Field"
               required
             />
-            <!-- <span
+            <span
                 class="error"
                 *ngIf="
-                  (f.controls.['name']?.errors?.required &&
-                    (f.controls.['name'].dirty || f.controls.['name'].touched)) ||
-                  isAllValid
+                  (f.controls.DistributorName?.errors?.required &&
+                    (f.controls.DistributorName.dirty || f.controls.DistributorName.touched)) ||
+                  isAllvalid
                 "
               >
-                Your user name is required.
-              </span> -->
+                Field is required.
+              </span>
           </div>
+          <div class="formInput" style="flex-grow: 1">
+            <label
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              for="name"
+              >Firm Name</label
+            >
+            <input
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="text"
+              id="firmname"
+              formControlName="FirmName"
+              placeholder="Enter your firm name"
+              required
+            />
+            <span
+                class="error"
+                *ngIf="
+                  (f.controls.FirmName?.errors?.required &&
+                    (f.controls.FirmName.dirty || f.controls.FirmName.touched)) ||
+                  isAllvalid
+                "
+              >
+                Field is required.
+              </span>
+          </div>
+
           <div class="formInput" style="flex-grow: 1">
             <label
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -69,16 +95,16 @@
               placeholder="Enter your Email"
               required
             />
-            <!-- <span
+            <span
                 class="error"
                 *ngIf="
-                  (f.controls.['name']?.errors?.required &&
-                    (f.controls.['name'].dirty || f.controls.['name'].touched)) ||
-                  isAllValid
+                  (f.controls.DistributorEmail?.errors?.required &&
+                    (f.controls.DistributorEmail.dirty || f.controls.DistributorEmail.touched)) ||
+                  isAllvalid
                 "
               >
-                Your user name is required.
-              </span> -->
+                Field is required.
+              </span>
           </div>
 
           <div class="formInput" style="flex-grow: 1">
@@ -92,19 +118,19 @@
               type="number"
               id="mobile"
               formControlName="DistributorTelNo"
-              placeholder="Enter your mobile number"
+              placeholder="Enter Field"
               required
             />
-            <!-- <span
+            <span
                 class="error"
                 *ngIf="
-                  (f.controls.['mobile'].errors?.required &&
-                    (f.controls.['mobile'].dirty || f.controls.['mobile'].touched)) ||
-                  isAllValid
+                  (f.controls.DistributorTelNo.errors?.required &&
+                    (f.controls.DistributorTelNo.dirty || f.controls.DistributorTelNo.touched)) ||
+                  isAllvalid
                 "
               >
-                Your mobile number is required.
-              </span> -->
+                Field is required.
+              </span>
           </div>
         </div>
 
@@ -123,44 +149,43 @@
               type="text"
               id="address"
               formControlName="DistributorAddress"
-              placeholder="Enter your address"
+              placeholder="Enter Field"
               required
             />
 
-            <!-- <span
-                class="error"
-                *ngIf="
-                  (f.controls.['address'].errors?.required &&
-                    (f.controls.['address'].dirty ||
-                      f.controls.['address'].touched)) ||
-                  isAllValid
-                "
-              >
-                Your address is required.
-              </span> -->
+            <span
+              class="error"
+              *ngIf="
+              (f.controls.DistributorAddress?.errors?.required &&
+                (f.controls.DistributorAddress.dirty || f.controls.DistributorAddress.touched)) || isAllvalid "
+            >
+              Field is required.
+            </span>
           </div>
-
-          
         </div>
-        <div class="formInput" style="flex-grow: 1">
+        <div class="formInput" style="flex-grow: 1" [hidden]="id">
           <label
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             for="city"
             >City</label
           >
-          <ng-select formControlName="CityId" [items]="citys" bindLabel="CityArea" bindValue="CityId">
+          <ng-select  [multiple]="true" formControlName="CityId">
+            <ng-option *ngFor="let option of citys" [value]="option.CityId"
+              >{{ option.CityArea }}{{ option.CityId }}</ng-option
+            >
           </ng-select>
-          
-          <!-- <span
+          <!-- <ng-select formControlName="CityId" [items]="citys" bindLabel="CityArea" bindValue="CityId" [multiple]="true"></ng-select> -->
+
+          <span
               class="error"
               *ngIf="
-                (f.controls.['city'].errors?.required &&
-                  (f.controls.['city'].dirty || f.controls.['city'].touched)) ||
-                isAllValid
+                (f.controls.CityId.errors?.required &&
+                  (f.controls.CityId.dirty || f.controls.CityId.touched)) ||
+                isAllvalid
               "
             >
-              Your city is required.
-            </span> -->
+              Field is required.
+            </span>
         </div>
 
         <div class="formInput" style="flex-grow: 1">
@@ -178,17 +203,17 @@
             required
           />
 
-          <!-- <span
+          <span
               class="error"
               *ngIf="
-                (f.controls.['address'].errors?.required &&
-                  (f.controls.['address'].dirty ||
-                    f.controls.['address'].touched)) ||
-                isAllValid
+                (f.controls.BankName.errors?.required &&
+                  (f.controls.BankName.dirty ||
+                    f.controls.BankName.touched)) ||
+                isAllvalid
               "
             >
-              Your address is required.
-            </span> -->
+              Field is required.
+            </span>
         </div>
         <div class="formInput" style="flex-grow: 1">
           <label
@@ -205,17 +230,17 @@
             required
           />
 
-          <!-- <span
+          <span
               class="error"
               *ngIf="
-                (f.controls.['address'].errors?.required &&
-                  (f.controls.['address'].dirty ||
-                    f.controls.['address'].touched)) ||
-                isAllValid
+                (f.controls.IFSCCode.errors?.required &&
+                  (f.controls.IFSCCode.dirty ||
+                    f.controls.IFSCCode.touched)) ||
+                isAllvalid
               "
             >
-              Your address is required.
-            </span> -->
+              Field is required.
+            </span>
         </div>
         <div class="formInput" style="flex-grow: 1">
           <label
@@ -232,17 +257,17 @@
             required
           />
 
-          <!-- <span
+          <span
               class="error"
               *ngIf="
-                (f.controls.['address'].errors?.required &&
-                  (f.controls.['address'].dirty ||
-                    f.controls.['address'].touched)) ||
-                isAllValid
+                (f.controls.ChequeNumber1.errors?.required &&
+                  (f.controls.ChequeNumber1.dirty ||
+                    f.controls.ChequeNumber1.touched)) ||
+                isAllvalid
               "
             >
-              Your address is required.
-            </span> -->
+              Field is required.
+            </span>
         </div>
         <div class="formInput" style="flex-grow: 1">
           <label
@@ -259,26 +284,26 @@
             required
           />
 
-          <!-- <span
+          <span
               class="error"
               *ngIf="
-                (f.controls.['address'].errors?.required &&
-                  (f.controls.['address'].dirty ||
-                    f.controls.['address'].touched)) ||
-                isAllValid
+                (f.controls.ChequeNumber2.errors?.required &&
+                  (f.controls.ChequeNumber2.dirty ||
+                    f.controls.ChequeNumber2.touched)) ||
+                isAllvalid
               "
             >
-              Your address is required.
-            </span> -->
+              Field is required.
+            </span>
         </div>
-   
+
         <!-- <div class="formInput sm:pt-0 sm:m-0" style="padding-top: 10px">
             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"for="mobilenumber">Mobile Number</label>
             <input  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               type="tel"
               id="mobilenumber"
               formControlName="mobilenumber"
-              placeholder="Enter your mobile number"
+              placeholder="Enter Field"
               required
             /> -->
         <!-- <span
@@ -286,18 +311,13 @@
               *ngIf="
                 (f.controls.['mobilenumber'].errors?.required &&
                   (f.controls.['mobilenumber'].dirty || f.controls.['mobilenumber'].touched)) ||
-                isAllValid
+                isAllvalid
               "
             >
-              Your mobile number is required.
+              Field is required.
             </span> -->
         <!-- </div> -->
 
-       
-        
-        
-      
-        
         <div class="pt-3 flex justify-end">
           <button
             type="submit"

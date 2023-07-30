@@ -35,12 +35,17 @@ export class AddEditSellerComponent implements OnInit {
     });
   }
   get f() {
-    return this.sellerForm.controls;
+    return this.sellerForm;
   }
   resetData() {
     this.sellerForm.reset();
   }
+  isAllValid!:boolean
   formSubmit() {
+    if(this.sellerForm.invalid){
+      this.isAllValid = true;
+      return
+    }
     if (this.sellerForm.valid) {
       if (this.id) {
         this.api.updateProduct(this.id, this.sellerForm.value).subscribe({

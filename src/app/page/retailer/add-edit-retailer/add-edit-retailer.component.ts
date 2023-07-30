@@ -22,6 +22,7 @@ export class AddEditRetailerComponent implements OnInit {
     CityId: ['', [Validators.required]],
     DistributorId: ['', [Validators.required]],
     MerchantName: ['', [Validators.required]],
+    FirmName:['',[Validators.required]],
     MerchantGSTNumber: ['', [Validators.required]],
     MerchantEmail: ['', [Validators.required]],
     MerchantTelNo: ['', [Validators.required]],
@@ -30,7 +31,9 @@ export class AddEditRetailerComponent implements OnInit {
   });
 
   id: any;
+  isAllValid!:boolean;
   ngOnInit(): void {
+    this.isAllValid = false;
     this.getCity();
     this.getDistributor();
     this.ActiveRoute.params.subscribe((params: any) => {
@@ -81,6 +84,10 @@ export class AddEditRetailerComponent implements OnInit {
     });
   }
   formSubmit() {
+    if(this.retailerForm.invalid){
+      this.isAllValid = true;
+      return
+    }
     this.retailerForm.controls['MerchantCity'].setValue(
       this.retailerForm.controls['CityId'].value
     );
@@ -104,7 +111,9 @@ export class AddEditRetailerComponent implements OnInit {
     }else{
 
       if (this.retailerForm.valid) {
+        debugger
         this.api.addMerchant(this.retailerForm.value).subscribe({
+
           next: (result:any) => {
             this.spinner.hide();
             this.route.navigate(['/retailer']);
@@ -122,5 +131,8 @@ export class AddEditRetailerComponent implements OnInit {
   }
   resetData() {
     this.retailerForm.reset();
+  }
+  get f(){
+    return this.retailerForm;
   }
 }
