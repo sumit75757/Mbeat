@@ -66,7 +66,13 @@ export class SellerComponent implements OnInit {
     this.catID = ''
     this.catogroyForm.reset();
   }
+  isAllvalid!:boolean
   formSubmit() {
+    if(this.catogroyForm.invalid){
+      this.isAllvalid = true;
+      return
+    }
+    
     this.catogroyForm.controls['ProductId'].setValue(this.id);
     if (this.catogroyForm.valid) {
       this.api.addcaogory(this.catogroyForm.value).subscribe({

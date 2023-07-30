@@ -67,7 +67,13 @@ export class AddEditCityComponent implements OnInit {
   resetData() {
     this.cityForm.reset();
   }
+  isAllvalid!:boolean
   formSubmit() {
+    if(this.cityForm.invalid){
+      this.isAllvalid = true;
+      return
+    }
+    
     // this.spinner.show();
     //console.log(this.cityForm.value);
     if (!this.id) {
