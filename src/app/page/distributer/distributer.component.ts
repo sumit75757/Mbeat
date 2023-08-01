@@ -29,7 +29,7 @@ export class DistributerComponent implements OnInit {
   }
   Distributors: any;
   getDistributor() {
-    this.Distributors = []
+    this.Distributors = [];
     this.spinner.show();
     this.api.getDistributor().subscribe({
       next: (res: any) => {
@@ -122,23 +122,28 @@ export class DistributerComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, keep it',
     }).then((result) => {
-      this.spinner.show()
-      this.api.deleteDistCity(id).subscribe({
-        next: (res: any) => {
+      if (result.value) {
+        this.spinner.show();
+        this.api.deleteDistCity(id).subscribe({
+          next: (res: any) => {
           this.Distributors = null
-          this.resetData()
-          this.getDistributor();
-      this.spinner.hide()
+            setTimeout(() => {
+              this.getDistributor();
+              this.resetData();
+            }, 200);
+         
+            this.spinner.hide();
 
-          Swal.fire(res.message);
-        },
-        error: (err) => {
-          //console.log(err);
-      this.spinner.hide()
+            Swal.fire(res.message);
+          },
+          error: (err) => {
+            //console.log(err);
+            this.spinner.hide();
 
-          Swal.fire(err.message);
-        },
-      });
+            Swal.fire(err.message);
+          },
+        });
+      }
     });
   }
   resetData() {

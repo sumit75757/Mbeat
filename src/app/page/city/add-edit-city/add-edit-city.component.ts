@@ -61,7 +61,7 @@ export class AddEditCityComponent implements OnInit {
   }
 
   get f() {
-    return this.cityForm.controls;
+    return this.cityForm;
   }
 
   resetData() {
