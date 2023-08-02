@@ -5,8 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
- bashUrl: string = 'http://localhost:8000/api/';
-  // bashUrl:string = "https://mbeatapi.onrender.com/api/"
+//  bashUrl: string = 'http://localhost:8000/api/';
+  bashUrl:string = "https://mbeatapi.onrender.com/api/"
   Role: BehaviorSubject<any> = new BehaviorSubject({});
 
   constructor(private http: HttpClient) {}
