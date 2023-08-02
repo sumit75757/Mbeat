@@ -84,7 +84,7 @@ export class AddEditRetailerComponent implements OnInit {
     });
   }
   formSubmit() {
-    if(this.retailerForm.invalid){
+    if(this.retailerForm.valid){
       this.isAllValid = true;
       return
     }
