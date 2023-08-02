@@ -42,7 +42,7 @@ export class AddEditSellerComponent implements OnInit {
   }
   isAllValid!:boolean
   formSubmit() {
-    if(this.sellerForm.invalid){
+    if(this.sellerForm.valid){
       this.isAllValid = true;
       return
     }
