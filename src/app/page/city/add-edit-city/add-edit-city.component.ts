@@ -69,7 +69,7 @@ export class AddEditCityComponent implements OnInit {
   }
   isAllvalid!:boolean
   formSubmit() {
-    if(this.cityForm.invalid){
+    if(!this.cityForm.valid){
       this.isAllvalid = true;
       return
     }

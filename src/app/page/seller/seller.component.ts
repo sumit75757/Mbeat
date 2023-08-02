@@ -68,12 +68,12 @@ export class SellerComponent implements OnInit {
   }
   isAllvalid!:boolean
   formSubmit() {
-    if(this.catogroyForm.invalid){
+    this.catogroyForm.controls['ProductId'].setValue(this.id);
+    if(!this.catogroyForm.valid){
       this.isAllvalid = true;
       return
     }
     
-    this.catogroyForm.controls['ProductId'].setValue(this.id);
     if (this.catogroyForm.valid) {
       this.api.addcaogory(this.catogroyForm.value).subscribe({
         next: (res: any) => {

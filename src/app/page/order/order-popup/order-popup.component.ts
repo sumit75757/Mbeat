@@ -197,7 +197,7 @@ getmerchant(id: any) {
   });
 }
 formSubmit() {
-  if(this.orderForm.invalid){
+  if(!this.orderForm.valid){
     this.isAllValid = true;
     return
   }

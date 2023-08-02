@@ -90,7 +90,7 @@ export class AddEditDistributerComponent implements OnInit {
     this.distributorForm.reset();
   }
   formSubmit() {
-    if(this.distributorForm.invalid){
+    if(!this.distributorForm.valid){
       this.isAllvalid = true;
       return
     }

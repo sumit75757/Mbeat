@@ -45,9 +45,9 @@ export class RetailerComponent implements OnInit {
     this.is_open =! this.is_open; 
   }
   submit(){
-    console.log("Hiii",this.dataForm.invalid);
+    console.log("Hiii",this.dataForm.valid);
     
-    if (this.dataForm.invalid) {
+    if (!this.dataForm.valid) {
       this.isAllvalid = true;
       return;
     }

@@ -206,7 +206,7 @@ export class FormPopupComponent implements OnInit {
   }
   isAllvalid!:boolean
   formSubmit() {
-    if(this.orderForm.invalid){
+    if(!this.orderForm.valid){
       this.isAllvalid = true;
       return
     }

@@ -84,13 +84,13 @@ export class AddEditRetailerComponent implements OnInit {
     });
   }
   formSubmit() {
-    if(this.retailerForm.valid){
-      this.isAllValid = true;
-      return
-    }
     this.retailerForm.controls['MerchantCity'].setValue(
       this.retailerForm.controls['CityId'].value
     );
+    if(!this.retailerForm.valid){
+      this.isAllValid = true;
+      return
+    }
     //console.log(this.retailerForm.value);
     if (this.id) {
       if (this.retailerForm.valid) {
@@ -111,7 +111,6 @@ export class AddEditRetailerComponent implements OnInit {
     }else{
 
       if (this.retailerForm.valid) {
-        debugger
         this.api.addMerchant(this.retailerForm.value).subscribe({
 
           next: (result:any) => {
