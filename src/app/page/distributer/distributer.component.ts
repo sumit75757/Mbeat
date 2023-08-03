@@ -130,7 +130,7 @@ export class DistributerComponent implements OnInit {
             setTimeout(() => {
               this.getDistributor();
               this.resetData();
-            }, 200);
+            }, 600);
          
             this.spinner.hide();
 
