@@ -116,7 +116,7 @@
                           *ngIf="
                             (f.controls.ProductName?.errors?.required &&
                               (f.controls.ProductName.dirty || f.controls.ProductName.touched)) ||
-                            isAllValid && f.controls.ProductName.invalid
+                            isAllValid 
                           "
                         >
                           Product name is required.
@@ -140,7 +140,7 @@
                           *ngIf="
                             (f.controls.ProductCategory?.errors?.required &&
                               (f.controls.ProductCategory.dirty || f.controls.ProductCategory.touched)) ||
-                            isAllValid && f.controls.ProductCategory.invalid
+                            isAllValid 
                           "
                         >
                           Product category is required.
@@ -162,7 +162,7 @@
                           *ngIf="
                             (f.controls.Packing?.errors?.required &&
                               (f.controls.Packing.dirty || f.controls.Packing.touched)) ||
-                            isAllValid && f.controls.Packing.invalid
+                            isAllValid 
                           "
                         >
                           Packing is required.
@@ -188,7 +188,7 @@
                             *ngIf="
                               (f.controls.ProductQuantity?.errors?.required &&
                                 (f.controls.ProductQuantity.dirty || f.controls.ProductQuantity.touched)) ||
-                              isAllValid && f.controls.ProductQuantity.invalid
+                              isAllValid 
                             "
                           >
                             Product quantity is required.
@@ -213,7 +213,7 @@
                             *ngIf="
                               (f.controls.NOS?.errors?.required &&
                                 (f.controls.NOS.dirty || f.controls.NOS.touched)) ||
-                              isAllValid && f.controls.NOS.invalid
+                              isAllValid
                             "
                           >
                             Number of pack is required.
@@ -231,7 +231,6 @@
                           id="Scheme"
                           formControlName="Scheme"
                           placeholder="Enter scheme"
-                          required
                         />
                       </div>
                     </div>

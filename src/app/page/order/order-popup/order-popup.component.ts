@@ -51,9 +51,9 @@ constructor(
     MerchantId: ['', [Validators.required]],
     Packing: ['', [Validators.required]],
     NOS: ['', [Validators.required]],
-    Scheme: [''],
     // CityId:['',[Validators.required]],
     DistributorId:['',[Validators.required]],
+    Scheme: [''],
   });
 }
 CityId: any;
@@ -197,6 +197,8 @@ getmerchant(id: any) {
   });
 }
 formSubmit() {
+  console.log(this.orderForm.valid,this.orderForm.value);
+  
   if(!this.orderForm.valid){
     this.isAllValid = true;
     return
