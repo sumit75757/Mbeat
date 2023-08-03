@@ -113,7 +113,7 @@ export class DistributerComponent implements OnInit {
     }
   }
 
-  removecat(id: any) {
+  removecat(distId:any,id: any) {
     Swal.fire({
       title: 'Are you sure want to remove?',
       text: 'You will not be able to recover this file!',
@@ -124,7 +124,7 @@ export class DistributerComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.spinner.show();
-        this.api.deleteDistCity(id).subscribe({
+        this.api.deleteDistCity(distId,id).subscribe({
           next: (res: any) => {
           this.Distributors = null
             setTimeout(() => {
