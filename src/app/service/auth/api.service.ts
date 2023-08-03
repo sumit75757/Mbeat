@@ -101,10 +101,10 @@ export class ApiService {
       { headers: this.headers }
     );
   }
-  deleteDistCity(id: any) {
+  deleteDistCity(distId:any,id: any) {
     this.lodeheader();
     return this.http.delete(
-      this.bashUrl + 'Distributor/deleteDistCity?DistributorCityId=' + id,
+      this.bashUrl + 'Distributor/deleteDistCity?DistributorCityId=' + id +'&DistributorId='+distId,
       { headers: this.headers }
     );
   }

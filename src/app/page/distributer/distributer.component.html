@@ -102,7 +102,7 @@
                   *ngFor="let item1 of item.dist_details"
                 >
                 <div *ngIf="!item1.DistributorCityId">N/A</div>
-                <button *ngIf="item1.DistributorCityId" (click)="removecat(item1.DistributorCityId)">
+                <button *ngIf="item1.DistributorCityId" (click)="removecat(item.DistributorId,item1.DistributorCityId)">
 
                   {{ item1.DistributorCityName }}
                 </button>
