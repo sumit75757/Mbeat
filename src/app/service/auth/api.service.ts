@@ -104,7 +104,7 @@ export class ApiService {
   deleteDistCity(distId:any,id: any) {
     this.lodeheader();
     return this.http.delete(
-      this.bashUrl + 'Distributor/deleteDistCity?DistributorCityId=' + id +'&&DistributorId='+distId,
+      this.bashUrl + 'Distributor/deleteDistCity?DistributorCityId=' + id +'&DistributorId='+distId,
       { headers: this.headers }
     );
   }
